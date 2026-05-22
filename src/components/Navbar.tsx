@@ -26,7 +26,6 @@ export default function Navbar() {
                 
             <div className="flex gap-6 text-xl font-medium">
                 <Link href="/" className={linkClass("/")}>Home</Link>
-                <Link href="/search" className={linkClass("/search")}>Search</Link>
                 <Link href="/products" className={linkClass("/products")}>Products</Link>
                 <Link href="/artists" className={linkClass("/artists")}>Artists</Link>
                 <Link href="/join" className={linkClass("/join")}>Join</Link>
