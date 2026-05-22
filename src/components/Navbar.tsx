@@ -7,8 +7,8 @@ export default function Navbar() {
 
     const linkClass = (path: string) => {
        return pathname === path
-            ? "text-terracotta font-semibold"
-            : "hover:text-terracotta"
+            ? "text-terracotta font-semibold border-b-2 border-terracotta pb-1"
+            : "border-b-2 border-transparent hover:text-terracotta pb-1"
     }
 
     
