@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --terracotta: #b86e49;
+  --sage: #788e79;
+  --navy: #2b4b64;
+  --ivory: #f3ebdf;
+}
+
+.nav-link {
+    position: relative;
+ }
+
+.nav-link:hover {
+    text-decoration: underline;
+    color: var(--terracotta);
+}

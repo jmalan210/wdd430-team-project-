@@ -11,7 +11,11 @@ module.exports = {
         sage: '#788e79',
         navy: '#2b4b64',
         ivory: '#f3ebdf'
-      }
+      },
+      fontFamily: {
+        heading: ["var(--font-heading)"],
+        body: ["var(--font-body)"],
+      },
     },
   },
   plugins: [],
