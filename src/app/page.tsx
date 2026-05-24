@@ -1,12 +1,13 @@
 export const revalidate = 21600;
 import ArtistCard from "@/components/ArtistCard";
 import ProductSpotlightCard from "@/components/ProductSpotlightCard";
-import { getRandomSpotlightArtist } from "@/lib/artists";
+import { getArtists, getRandomSpotlightArtist } from "@/lib/artists";
 
 
 export default async function Home() {
-  
-  const spotlightArtists =  await getRandomSpotlightArtist(2);
+  const artists = await getArtists();
+  const bucket = Math.floor(Date.now() / (1000 * 60 * 60 * 6)); //logic to keep the spotlighted artists the same for 6 hours
+  const spotlightArtists =  await getRandomSpotlightArtist(artists, bucket, 2);
   return (
     <main className="bg-ivory">
       <div className="flex">
