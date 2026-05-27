@@ -10,12 +10,31 @@ export default async function Home() {
   
   const bucket = getBucket();
   const spotlightArtists = await pool.query("SELECT artist_ids from artist_spotlight WHERE bucket = $1", [bucket]);
-  const artistIds = spotlightArtists.rows[0]?.artist_ids || [];
+  let artistIds = spotlightArtists.rows[0]?.artist_ids;
 
-  const artistsResult = await pool.query("SELECT * FROM artists where id = ANY($1)", [artistIds]
-  );
+  //fallback to most recent spotlight
+  if (!artistIds || artistIds.length === 0) {
+    const latest = await pool.query(
+      "SELECT artist_ids FROM artist_spotlight ORDER BY bucket DESC LIMIT 1"
+    );
+    artistIds = latest.rows[0]?.artist_ids;
+  }
 
-  const artists = artistsResult.rows;
+  //fallback to random artist
+  let artists;
+
+  if (!artistIds || artistIds.length === 0) {
+    const fallback = await pool.query(
+      "SELECT * FROM artists ORDER BY RANDOM() LIMIT 2"
+    );
+    artists = fallback.rows;
+  } else {
+    const result = await pool.query("SELECT * FROM artists where id = ANY($1)", [artistIds]);
+
+    artists = result.rows
+    
+  }
+  
   return (
     <main className="bg-ivory">
       <div className="flex">
