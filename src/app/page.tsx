@@ -3,7 +3,7 @@ import ArtistCard from "@/components/ArtistCard";
 import ProductSpotlightCard from "@/components/ProductSpotlightCard";
 
 function getBucket() {
-    return Math.floor(Date.now() / (1000 * 60 * 60 * 6));
+    return Math.floor(Date.now() / (1000 * 60));
 }
 
 export default async function Home() {
