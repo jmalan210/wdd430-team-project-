@@ -1,39 +1,11 @@
-import { pool } from "@/lib/db";
 import ArtistCard from "@/components/ArtistCard";
 import ProductSpotlightCard from "@/components/ProductSpotlightCard";
+import { getSpotlightArtists } from "@/lib/spotlight";
 
-function getBucket() {
-    return Math.floor(Date.now() / (1000 * 60));
-}
+
 
 export default async function Home() {
-  
-  const bucket = getBucket();
-  const spotlightArtists = await pool.query("SELECT artist_ids from artist_spotlight WHERE bucket = $1", [bucket]);
-  let artistIds = spotlightArtists.rows[0]?.artist_ids;
-
-  //fallback to most recent spotlight
-  if (!artistIds || artistIds.length === 0) {
-    const latest = await pool.query(
-      "SELECT artist_ids FROM artist_spotlight ORDER BY bucket DESC LIMIT 1"
-    );
-    artistIds = latest.rows[0]?.artist_ids;
-  }
-
-  //fallback to random artist
-  let artists;
-
-  if (!artistIds || artistIds.length === 0) {
-    const fallback = await pool.query(
-      "SELECT * FROM artists ORDER BY RANDOM() LIMIT 2"
-    );
-    artists = fallback.rows;
-  } else {
-    const result = await pool.query("SELECT * FROM artists where id = ANY($1)", [artistIds]);
-
-    artists = result.rows
-    
-  }
+  const artists = await getSpotlightArtists();
   
   return (
     <main className="bg-ivory">
