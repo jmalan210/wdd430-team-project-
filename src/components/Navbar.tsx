@@ -18,7 +18,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-3">
                     <img src="/images/logo.svg" alt="Handcrafted Haven Logo" className="h-20 w-auto" />
                     <div className="leading-tight">
-                    <Link href='/' className="text-4xl font-bold font-heading tracking-wide">Handcrafted Haven</Link>
+                    <Link href='/' className="text-6xl font-bold font-heading tracking-wide">Handcrafted Haven</Link>
                     <p className="text-sm italic">Where artisans and admirers come together</p>
                     </div>
                 </div>

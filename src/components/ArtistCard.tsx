@@ -12,7 +12,8 @@ export default function ArtistCard({artist}: any) {
                             <img src={artist.image_url} alt={`${artist.first_name} ${artist.last_name}`} className=" h-48 aspect-square object-cover object-center rounded-lg shadow-lg border-8 border-white" />
                             <p className="text-navy mt-2">{artist.bio}</p>
                         </div>
-                        
+            <Link href={`storefront/${artist.id}`}>
+                <button>{`Visit ${artist.business_name}`}</button></Link>
                     </div>
                 )}
            

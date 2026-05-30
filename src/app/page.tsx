@@ -1,5 +1,5 @@
 import ArtistCard from "@/components/ArtistCard";
-import ProductSpotlightCard from "@/components/ProductSpotlightCard";
+import ProductCard from "@/components/ProductCard";
 import { getSpotlightArtists } from "@/lib/spotlight";
 
 
@@ -17,9 +17,9 @@ export default async function Home() {
             <ArtistCard key={artist.id} artist={artist} />
           ))}
         </div>
-        <div className="flex flex-col w-1/2 gap-2">
-          <ProductSpotlightCard />
-        </div>
+        {/* <div className="flex flex-col w-1/2 gap-2">
+          <ProductCard />
+        </div> */}
         </div>
     </main>
   );

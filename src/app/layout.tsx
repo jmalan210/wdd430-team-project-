@@ -4,12 +4,12 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const playfair = Playfair_Display({
+const headingFont = Playfair_Display({
   variable: "--font-heading",
   subsets: ["latin"],
 });
 
-const inter = Inter({
+const bodyFont = Inter({
   variable: "--font-body",
   subsets: ["latin"],
 });
@@ -27,9 +27,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${inter.variable} h-full antialiased`}
+      className={`${headingFont.variable} ${bodyFont.variable} h-full antialiased`}
     >
-      <body className="font-body">
+      <body className="font-body text-navy">
         <Navbar />
         {children}
         <Footer />
