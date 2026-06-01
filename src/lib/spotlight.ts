@@ -1,4 +1,5 @@
 import { pool } from "./db";
+import { getArtistProducts, getProductsWithImages } from "./products";
 
 function getBucket() {
     return Math.floor(Date.now() / (1000 * 60 * 60 * 6)); //refreshes every 6 hours
@@ -52,18 +53,29 @@ export async function getSpotlightProducts() {
     
 
     if (!productIds?.length) {
-        const ids = await pool.query(`select id from products`);
-         const shuffled = shuffle(ids.rows.map(r => r.id));
-       productIds = shuffled.slice(0,1)
+        const ids = (await pool.query(`select id from products`)
+        ).rows.map(r => r.id);
+       
+        productIds = shuffle(ids).slice(0, 1);
+
          await pool.query(
         `insert into product_spotlight(bucket, product_ids)
         values($1, $2)
         ON CONFLICT (bucket)
-        DO NOTHING
+        DO UPDATE SET product_ids = EXCLUDED.product_ids
         `,
         [bucket, productIds]
 
     );
     }
-    return productIds;
+    return getProductsWithImages(productIds);
+}
+
+export async function getProductFeed() {
+    const ids = (
+        await pool.query(
+            `select id from products order by name desc`
+        )
+    ).rows.map(r => r.id);
+    return getProductsWithImages(ids);
 }

@@ -7,6 +7,8 @@ type Product = {
     price: number;
     description: string;
     images?: string[];
+    artist_id: number;
+    business_name: string
 };
 
 type Props = {
@@ -17,8 +19,8 @@ type Props = {
 export default function ProductCard({ product }: Props) {
     return (
         <div className="flex flex-col shadow-xl rounded-lg bg-ivory p-4">
-            <h3 className="text-2xl bold pb-2">{product.name}</h3>
-            <p>by {product.business_name}</p>
+            <h3 className="text-2xl bold">{product.name}</h3>
+            <p className="text-terracotta pb-2">by {product.business_name}</p>
             <p className="italic pb-2">${product.price}</p>
             
             

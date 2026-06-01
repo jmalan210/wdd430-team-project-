@@ -1,6 +1,5 @@
 import ArtistCard from "@/components/ArtistCard";
 import ProductCard from "@/components/ProductCard";
-import { getProductsWithImages } from "@/lib/products";
 import { getSpotlightArtists } from "@/lib/spotlight";
 import { getSpotlightProducts } from "@/lib/spotlight";
 
@@ -8,8 +7,8 @@ import { getSpotlightProducts } from "@/lib/spotlight";
 
 export default async function Home() {
   const artists = await getSpotlightArtists();
-  const ids = await getSpotlightProducts();
-  const products = await getProductsWithImages(ids);
+  
+  const products = await getSpotlightProducts();
   
   return (
     <main className="bg-ivory">
