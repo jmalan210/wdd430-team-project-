@@ -16,6 +16,10 @@ export default async function StoreFrontPage({ params, }: { params: { artistId: 
         return <div>Artist Not Found</div>;
     }
     const products = await getArtistProducts(artistId);
+    console.log("artistId:", artistId);
+    console.log("products:", products); 
+    console.log("params:", params);
+    console.log("artistId raw:", params?.artistId);
     return (
         <div>
             <h1 className="text-center text-4xl ">{artist?.business_name}</h1>
