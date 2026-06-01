@@ -1,9 +1,7 @@
 import { pool } from "./db";
 
-
-
 function getBucket() {
-    return Math.floor(Date.now() / (1000 * 60 * 60 * 6));
+    return Math.floor(Date.now() / (1000 * 60 * 60 * 6)); //refreshes every 6 hours
 } 
 
 function shuffle(array: any[]) {
@@ -43,4 +41,29 @@ export async function getSpotlightArtists() {
     const result = await pool.query("SELECT * FROM artists WHERE id = ANY($1)", [artistIds]);
     
     return result.rows;
+}
+
+export async function getSpotlightProducts() {
+    const bucket = getBucket();
+    const existing = await pool.query(
+        "SELECT product_ids FROM product_spotlight WHERE bucket = $1", [bucket]
+    );
+    let productIds = existing.rows[0]?.product_ids;
+    
+
+    if (!productIds?.length) {
+        const ids = await pool.query(`select id from products`);
+         const shuffled = shuffle(ids.rows.map(r => r.id));
+       productIds = shuffled.slice(0,1)
+         await pool.query(
+        `insert into product_spotlight(bucket, product_ids)
+        values($1, $2)
+        ON CONFLICT (bucket)
+        DO NOTHING
+        `,
+        [bucket, productIds]
+
+    );
+    }
+    return productIds;
 }

@@ -1,5 +1,5 @@
 import { pool } from "./db";
-import { seededRandom } from "./utils";
+
 
 export async function getArtists() {
     const result = await pool.query(
@@ -8,9 +8,3 @@ export async function getArtists() {
     return result.rows;
 }
 
-export function getRandomSpotlightArtist(artists: any[], bucket: number, count = 2) {
-    return [...artists]
-        .sort(() => seededRandom(bucket) - 0.5)
-        .slice(0, count);
-
-}

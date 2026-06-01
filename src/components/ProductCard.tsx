@@ -16,12 +16,14 @@ type Props = {
 
 export default function ProductCard({ product }: Props) {
     return (
-        <div className="flex flex-col shadow-xl rounded-lg bg-white text-navy border-2 border-navy m-2 p-2">
-            <h3 className="text-2xl bold underline pb-2">{product.name}</h3>
+        <div className="flex flex-col shadow-xl rounded-lg bg-ivory p-4">
+            <h3 className="text-2xl bold pb-2">{product.name}</h3>
+            <p>by {product.business_name}</p>
             <p className="italic pb-2">${product.price}</p>
-            <p>{product.description}</p>
+            
             
             <div className="flex gap-2 overflow-x-auto align-middle justify-center">
+                <p className="justify-center align-middle">{product.description}</p>
                 {product.images?.map((url: string, index: number) => (
                     <Image
                         key={index}
@@ -29,7 +31,7 @@ export default function ProductCard({ product }: Props) {
                         alt={product.name}
                         width={200}
                         height={200}
-                        className="rounded"
+                        className="rounded-lg shadow-lg border-8 border-white"
                     />
                 ))}
                 
