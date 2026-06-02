@@ -7,6 +7,11 @@ import ProductCard from "@/components/ProductCard";
 
 export default async function StoreFrontPage({ params, }: { params: { artistId: string }; }) {
     const artistId = parseInt(params.artistId);
+    if (isNaN(artistId)) {
+        return (
+            <div>Invalid artistId: {JSON.stringify(params)}</div>
+        )
+    }
     const artistRes = await pool.query(
         "Select * from artists where id = $1", [artistId]
     );
