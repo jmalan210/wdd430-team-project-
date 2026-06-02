@@ -52,7 +52,7 @@ export async function getArtistProducts(artistId: number) {
          on p.artist_id = a.id
          LEFT JOIN product_images pi
          on p.id = pi.product_id
-         WHERE p.id = ANY($1)
+         WHERE p.id =$1
          GROUP BY p.id, p.name, p.price, p.artist_id, description, a.business_name
     `, [artistId]
     );
