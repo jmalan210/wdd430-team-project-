@@ -5,7 +5,11 @@ import ProductCard from "@/components/ProductCard";
 
 
 
-export default async function StoreFrontPage({ params, }: { params: { artistId: string }; }) {
+export default async function StoreFrontPage({
+    params,
+}: {
+    params: Promise<{ params: { artistId: string }>;
+}) {
     const artistId = parseInt(params.artistId);
     if (isNaN(artistId)) {
         return (
