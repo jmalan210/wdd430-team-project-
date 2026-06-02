@@ -25,7 +25,8 @@ export default async function StoreFrontPage({
     if (!artist) {
         return <div>Artist Not Found</div>;
     }
-    const products: any[] = [];
+    const products = await getArtistProducts(artistIdNum);
+    console.log("products:", products);
     
     return (
         <div>
