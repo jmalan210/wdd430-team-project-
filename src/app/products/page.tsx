@@ -1,4 +1,5 @@
 import ProductCard from "@/components/ProductCard";
+import SortDropDown from "@/components/SortDropdown";
 import { getAllProductsWithImages } from "@/lib/products";
 
 
@@ -14,13 +15,16 @@ export default async function ProductsPage({ searchParams, }: {
         <main className="p-8">
         
             <h1 className="text-4xl font-bold mb-6" >Products</h1>
-            <div className="flex gap-4 mb-4">
-                <a href="/products?sort=name">Name</a>
-                <a href="/products?sort=price_asc">Price ↑</a>
-                <a href="/products?sort=price_desc">Price ↓</a>
-                <a href="/products?sort=medium">Medium</a>
-                <a href="/products">Reset</a>
-            </div>
+            <SortDropDown
+                options={[
+                    { label: "Name", value: "name" },
+                    { label: "Price ↑", value: "price_asc" },
+                    { label: "Price ↓", value: "price_desc" },
+                    { label: "Medium", value: "medium" },
+                    { label: "Business Name", value: "business_name"},
+                       
+                    
+                ]}/>
                     <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
                         {products.map((product: any)=> (
                         <ProductCard key={product.id} product={product} />
