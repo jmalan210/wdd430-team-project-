@@ -6,7 +6,7 @@ import ProductCard from "@/components/ProductCard";
 
 
 export default async function StoreFrontPage({ params, }: { params: { artistId: string }; }) {
-    const artistId = Number(params.artistId);
+    const artistId = parseInt(params.artistId);
     const artistRes = await pool.query(
         "Select * from artists where id = $1", [artistId]
     );
