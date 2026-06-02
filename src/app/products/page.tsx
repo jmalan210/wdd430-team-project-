@@ -1,5 +1,7 @@
-import UnderConstruction from "@/components/UnderConstruction";
 
-export default function ProductsPage() {
-    return <UnderConstruction title="Products" />
+
+export default function ProductsPage({ searchParams, }: {
+    searchParams: { sort?: string };
+}) {
+    
 }

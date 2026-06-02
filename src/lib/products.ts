@@ -53,7 +53,7 @@ export async function getArtistProducts(artistId: number) {
          GROUP BY product_id)
          img ON img.product_id = p.id
          WHERE p.artist_id =$1
-        order by p.id
+         order by p.created_at desc;
     `, [artistId]
     );
     return result.rows;
