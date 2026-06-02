@@ -43,17 +43,17 @@ export async function getArtistProducts(artistId: number) {
         p.artist_id,
         p.description,
         a.business_name,
-        COALESCE(
-        ARRAY_AGG(pi.image_url) FILTER (WHERE pi.image_url IS NOT NULL),
-        ARRAY[]::text[]
-        ) AS images
+        COALESCE(img.images, ARRAY[]::text[]) AS images
          FROM products p
          JOIN artists a
          on p.artist_id = a.id
-         LEFT JOIN product_images pi
-         on p.id = pi.product_id
-         WHERE p.id =$1
-         GROUP BY p.id, p.name, p.price, p.artist_id, description, a.business_name
+         LEFT JOIN (
+         SELECT product_id,
+         ARRAY_AGG(image_url) AS images FROM product_images
+         GROUP BY product_id)
+         img ON img.product_id = p.id
+         WHERE p.artist_id =$1
+        order by p.id
     `, [artistId]
     );
     return result.rows;
