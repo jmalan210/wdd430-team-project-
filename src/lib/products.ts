@@ -80,7 +80,8 @@ function getOrderBy(sort?: string) {
     }
 }
 
-export async function getAllProductsWithImage() {
+export async function getAllProductsWithImages(sort: string = "id") {
+    const orderBy = getOrderBy(sort);
     const result = await pool.query(
         `SELECT
         p.id,
@@ -100,7 +101,7 @@ export async function getAllProductsWithImage() {
          LEFT JOIN product_images pi
          on p.id = pi.product_id       
          GROUP BY p.id, p.name, p.price, p.artist_id, description, a.business_name, a.medium
-         ORDER BY p.id ASC
+         ORDER BY ${orderBy}
         `
     );
 
