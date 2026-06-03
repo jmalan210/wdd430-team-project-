@@ -10,17 +10,21 @@ type SortOption = {
 type Props = {
     options: SortOption[];
     paramName?: string; //default: "sort"
+    defaultLabel?: string;
+    defaultValue?: string;
 };
 
-export default function SortDropDown({
+export default function QueryDropDown({
     options,
     paramName = "sort",
+    defaultLabel = "Select",
+    defaultValue = "",
 }: Props) {
     const router = useRouter();
     const searchParams = useSearchParams();
     const pathName = usePathname();
 
-    const current = searchParams.get(paramName) || "id";
+    const current = searchParams.get(paramName) || defaultValue;
 
     function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
         const value = e.target.value;
@@ -33,7 +37,7 @@ export default function SortDropDown({
                 params.set(key, val);
             }
         });
-        if (value !== "id") {
+        if (value !== defaultValue) {
           
             params.set(paramName, value);
         }
@@ -43,9 +47,9 @@ export default function SortDropDown({
         <select
             value={current}
             onChange={handleChange}
-            className="border p-s rounded mb-4"
+            className="border p-2 rounded mb-4"
         >
-            <option value="id">Default</option>
+            <option value={defaultValue}>{defaultLabel}</option>
             {options.map((opt) => (
                 <option key={opt.value} value={opt.value}>
                     {opt.label}

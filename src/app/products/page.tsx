@@ -1,5 +1,5 @@
 import ProductCard from "@/components/ProductCard";
-import SortDropDown from "@/components/SortDropdown";
+import QueryDropDown from "@/components/QueryDropdown";
 import { getAllProductsWithImages } from "@/lib/products";
 
 
@@ -15,7 +15,7 @@ export default async function ProductsPage({ searchParams, }: {
         <main className="p-8">
         
             <h1 className="text-4xl font-bold mb-6" >Products</h1>
-            <SortDropDown
+            <QueryDropDown
                 options={[
                     { label: "Name", value: "name" },
                     { label: "Price ↑", value: "price_asc" },
