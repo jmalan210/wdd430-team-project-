@@ -41,24 +41,27 @@ export default function CheckboxFilter({ title, paramName, options }: Props) {
         router.push(`${pathname}?${params.toString()}`);
     }
     return (
-        <div className="mb-4">
+        <div className="flex mb-4">
+            <div className="grid grid-cols-1 gap-2 mb-4">
             <h3 className="font-semibold mb-2">{title}</h3>
             {options.map((option) => (
                 <label
                     key={option.value}
-                    className="flex items-center gap-2 mb-1"
+                    className="flex items-center gap-2"
                 >
                     <input
+                       
                         type="checkbox"
                         checked={selectedValues.includes(option.value)}
                         onChange={(e) =>
-                            handleChange(option.value, e.target.checked)
+                        handleChange(option.value, e.target.checked)
                         }
                     />
                     {option.label}
                 </label>
             ))}
-        </div>
+            </div>
+            </div>
     );
     
 

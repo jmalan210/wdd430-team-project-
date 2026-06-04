@@ -1,17 +1,18 @@
 import ArtistCard from "@/components/ArtistCard";
+import SideBar from "@/components/Sidebar";
 import QueryDropDown from "@/components/QueryDropdown";
 import CheckboxFilter from "@/components/CheckboxFilter";
 import { getArtistMediums, getArtists } from "@/lib/artists";
 
 export default async function ArtistsPage({ searchParams, }: {
     
-   searchParams: {
+   searchParams: Promise<{
         sort?: string;
         medium?: string | string[]
-    };
+    }>;
 }) {
     const params = await searchParams;
-    const sort = searchParams.sort || "id";
+    const sort = params.sort || "id";
     
    
     const mediums = 
@@ -24,12 +25,20 @@ export default async function ArtistsPage({ searchParams, }: {
     
 
     return (
+        
         <main className="p-8">
-
-            <h1 className="text-4xl font-bold mb-6" >Artists</h1>
+           
+          
+            <h1 className="text-4xl font-bold mb-6 text-center" >Artists</h1>
+             <div className="flex flex-col md:flex-row gap-6">
+            <SideBar>
+                <h2>Filters</h2>
+           
+            
             <QueryDropDown
+            
                 paramName="sort"
-                defaultLabel="Sort Artists"
+                defaultLabel="Sort By"
                 defaultValue=""
                             options={[
                                 { label: "Artist Name", value: "last_name" },
@@ -44,13 +53,16 @@ export default async function ArtistsPage({ searchParams, }: {
                     label: medium,
                     value: medium
             }))}
-           />
-            <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
+                />
+                </SideBar>
+               <div className="flex-1">
+            <div className="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-4">
                 {artists.map((artist: any)=> (
                 <ArtistCard key={artist.id} artist={artist} />
                  ))}
             </div>
-            
+           </div> 
+    </div>
         </main>
     )
 }
