@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export default function Navbar() {
     const pathname = usePathname()
@@ -40,7 +41,7 @@ export default function Navbar() {
         <nav className="w-full border-b-8 border-sage bg-ivory text-navy">
             <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
                 <div className="flex items-center gap-3">
-                    <img src="/images/logo.svg" alt="Handcrafted Haven Logo" className="h-20 w-auto" />
+                    <Image src="/images/logo.svg" alt="Handcrafted Haven Logo" width={80} height={80} className="h-20 w-auto" />
                     <div className="leading-tight">
                     <Link href='/' className="text-3xl md:text-5xl lg:text-6xl font-bold font-heading tracking-wide">Handcrafted Haven</Link>
                     <p className="hidden md:block text-sm italic">Where artisans and admirers come together</p>

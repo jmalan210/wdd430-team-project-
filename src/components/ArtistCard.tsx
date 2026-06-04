@@ -3,17 +3,30 @@ import Image from "next/image"
 
 export default function ArtistCard({artist}: any) {
     return (
-                    <div className="border rounded-xl p-4 shadow-lg bg-ivory">
+            <Link href={`storefront/${artist.id}`} className="block h-full" >
+            <div className="h-full flex flex-col border rounded-xl p-4 shadow-lg bg-ivory">
+                <div className="flex justify-start">
+                    <div className="relative w-36 h-36 shrink-0">
+                        <Image src={artist.image_url}
+                            alt={`${artist.first_name} ${artist.last_name}`}
+                            fill
+                            className="object-cover rounded-lg shadow-lg border-4 border-white" />
+                    </div>    
+                <div className="flex flex-col pl-3 justify-center">
                         <h2 className="text-2xl font-bold text-navy">{artist.first_name} {artist.last_name}</h2>
                         <h3 className="text-lg font-semibold text-terracotta">{artist.business_name}</h3>
                         <h4 className="text-sm italic text-sage">{artist.medium}</h4>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
-                            <img src={artist.image_url} alt={`${artist.first_name} ${artist.last_name}`} className=" h-48 aspect-square object-cover object-center rounded-lg shadow-lg border-8 border-white" />
-                            <p className="text-navy mt-2">{artist.bio}</p>
-                        </div>
-            <Link href={`storefront/${artist.id}`}>
-                <button>{`Visit ${artist.business_name}`}</button></Link>
                     </div>
+                    
+                    </div>
+                <div className="mt-4">
+                    
+                  
+                        <p className="text-navy line-clamp-3 ">{artist.bio}</p>
+                        </div>
+            
+                
+            </div>
+            </Link>
                 )}
            
