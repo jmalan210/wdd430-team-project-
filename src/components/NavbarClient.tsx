@@ -1,12 +1,15 @@
 "use client";
-
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 
-export default function NavbarClient({session}: any) {
+
+
+export default function NavbarClient() {
+    const { data: session } = useSession();
    
 
     const pathname = usePathname()
@@ -47,12 +50,34 @@ export default function NavbarClient({session}: any) {
                 <div className="flex items-center gap-3">
                     <Image src="/images/logo.svg" alt="Handcrafted Haven Logo" width={80} height={80} className="h-20 w-auto" />
                     <div className="leading-tight">
-                    <Link href='/' className="text-3xl md:text-5xl lg:text-6xl font-bold font-heading tracking-wide">Handcrafted Haven</Link>
+                    <Link href='/' className="text-3xl md:text-5xl lg:text-5xl font-bold font-heading tracking-wide">Handcrafted Haven</Link>
                     <p className="hidden md:block text-sm italic">Where artisans and admirers come together</p>
                     </div>
                 </div>
                 
-                <button
+               
+                <div className="flex flex-col gap-6 justify-end" >
+
+                {/*user controls */}
+                    <div className="flex flex-col md:flex-row items-center gap-2">
+                        <Image src="/images/user_icon.svg" alt="user icon" width={40} height={40}></Image>
+                        {session ? (
+                            <>
+                                <div className="flex flex-col lg:items-end md:items-center">
+                                        <p>{session.user?.email}</p>
+                                        <button onClick={() => signOut()} className="text-xs bold underline text-terracotta">Logout</button>
+                                </div>
+                               </>
+                        ) : (
+                            <Link href="/login">
+                                Log In / Sign Up
+                                </Link>
+                             
+                        )}
+                    </div>
+
+                    {/*Menu Desktop View */}
+                     <button
                     className="lg:hidden text-3xl"
                     onClick={() => setMenuOpen(!menuOpen)
                         
@@ -61,37 +86,17 @@ export default function NavbarClient({session}: any) {
                     {menuOpen ? "✕" : "☰"}
                    
                 </button>
+
             <div className="hidden lg:flex gap-6 text-l font-medium">
                 <Link href="/" className={linkClass("/")}>Home</Link>
                 <Link href="/artists" className={linkClass("/artists")}>Artists</Link>
                     <Link href="/products" className={linkClass("/products")}>Products</Link>
-                    {!session ? (
-                        <>
-                            {/* <Link href="/signup" className={linkClass("/signup")}>Sign Up</Link> */}
-                            <Link href="/login">
-                                <Image
-                                    src="/images/user_icon.svg"
-                                    alt="user icon"
-                                    width={30}
-                                    height={30}
-                                ></Image>
-                            </Link>
-                        </>
-                    ) : (
-                            <>
-                                <span>{session.user?.email}</span>
-                                {session.user?.role === "artist" && (
-                                    <Link href="/artist/dashboard">Artist Dashboard</Link>
-                                )}
-
-                               
-                                    <button onClick={() => signOut()} className="hover:text-terracotta">Logout</button>
-                                </>
-                    )}
-                
+                    </div>
+                    
                 </div>
             </div>
             
+            {/* Menu Mobile View*/}
             {menuOpen && (
                 
                 <div className="lg:hidden border-t border-sage bg-ivory">
@@ -99,22 +104,7 @@ export default function NavbarClient({session}: any) {
                         <Link href="/" className={`px-6 py3 ${mobileLinkClass("/")}`}>Home</Link>
                 <Link href="/artists" className={`px-6 py3 ${mobileLinkClass("/artists")}`}>Artists</Link>
                 <Link href="/products" className={`px-6 py3 ${mobileLinkClass("/products")}`}>Products</Link>
-                {!session ? (
-                        <>
-                            <Link href="/signup" className={linkClass("/signup")}>Sign Up</Link>
-                            <Link href="/login" className={linkClass("/login")}>Log in</Link>
-                        </>
-                    ) : (
-                            <>
-                                <span>{session.user?.email}</span>
-                                {session.user?.role === "artist" && (
-                                    <Link href="/artist/dashboard">Artist Dashboard</Link>
-                                )}
-
-                               
-                                    <button onClick={() => signOut()} className="hover:text-terracotta">Logout</button>
-                                </>
-                    )}
+                
                     </div>
                 </div>
             )}

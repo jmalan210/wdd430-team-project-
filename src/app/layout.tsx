@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
+import Providers from "./providers";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
 
 const headingFont = Playfair_Display({
   variable: "--font-heading",
@@ -19,20 +21,20 @@ export const metadata: Metadata = {
   description: "A community for artisans",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children, }: {
+  children: React.ReactNode
+}) { 
   return (
     <html
       lang="en"
       className={`${headingFont.variable} ${bodyFont.variable} h-full antialiased`}
     >
       <body className="font-body text-navy">
+        <Providers>
         <Navbar />
         {children}
-        <Footer />
+          <Footer />
+          </Providers>
       </body>
     </html>
   )
