@@ -57,14 +57,14 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
             } return token;
         },
         session({ session, token }) {
-            console.log("TOKEN:", token);
-            console.log("SESSION BEFORE:", session);
+            // console.log("TOKEN:", token);
+            // console.log("SESSION BEFORE:", session);
             session.user.id = token.id as string;
             session.user.role = token.role as string;
             session.user.firstname = token.firstname as string;
             session.user.lastname = token.lastname as string;
 
-            console.log("SESSION AFTER:", session);
+            // console.log("SESSION AFTER:", session);
             return session;
         },
     },
