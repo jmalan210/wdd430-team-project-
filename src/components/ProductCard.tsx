@@ -18,7 +18,7 @@ type Props = {
 
 export default function ProductCard({ product }: Props) {
     return (
-        <div className="flex flex-col shadow-xl rounded-lg bg-ivory p-4">
+        <div className="flex flex-col shadow-xl rounded-lg p-4 bg-ivory">
        
             <div >
             <h3 className="text-2xl bold">{product.name}</h3>

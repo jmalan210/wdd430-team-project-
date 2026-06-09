@@ -7,10 +7,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        terracotta: '#b86e49',
-        sage: '#788e79',
+        terracotta: '#935739',
+        sage: '#4a594b',
         navy: '#2b4b64',
-        ivory: '#f3ebdf'
+        ivory: '#f9f6f0'
       },
       fontFamily: {
         heading: ["var(--font-heading)"],

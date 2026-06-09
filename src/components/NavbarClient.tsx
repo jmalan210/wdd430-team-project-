@@ -45,7 +45,7 @@ export default function NavbarClient() {
 
     
     return (
-        <nav className="w-full border-b-8 border-sage bg-ivory text-navy">
+        <nav className="w-full border-b-8 border-sage/70 bg-ivory text-navy">
             <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
                 <div className="flex items-center gap-3">
                     <Image src="/images/logo.svg" alt="Handcrafted Haven Logo" width={80} height={80} className="h-20 w-auto" />
@@ -65,7 +65,7 @@ export default function NavbarClient() {
                             <>
                                 <div className="flex flex-col lg:items-end md:items-center">
                                         <p>{session.user?.email}</p>
-                                        <button onClick={() => signOut()} className="text-xs bold underline text-terracotta">Logout</button>
+                                        <button onClick={() => signOut()} className="text-s bold underline">Logout</button>
                                 </div>
                                </>
                         ) : (

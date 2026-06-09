@@ -4,7 +4,7 @@ import Image from "next/image"
 export default function ArtistCard({artist}: any) {
     return (
             <Link href={`storefront/${artist.id}`} className="block h-full" >
-            <div className="h-full flex flex-col border rounded-xl p-4 shadow-lg bg-ivory">
+            <div className="h-full flex flex-col border rounded-xl p-4 shadow-lg  bg-ivory">
                 <div className="flex justify-between">
                    
                 <div className="flex flex-col pl-3 justify-center text-left">
