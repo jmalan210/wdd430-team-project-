@@ -63,9 +63,19 @@ export default function NavbarClient() {
                         <Image src="/images/user_icon.svg" alt="user icon" width={40} height={40}></Image>
                         {session ? (
                             <>
-                                <div className="flex flex-col items-center">
+                                <div className="flex flex-col items-center gap-1">
                                     <p className="text-lg">{session.user?.firstname} {session.user?.lastname}</p>
-                                        <button onClick={() => signOut()} className="text-xs bold underline">Logout</button>
+
+                                    {session?.user?.role === "artist" && (
+                                        <Link 
+                                            href="/artists/dashboard"
+                                            className="text-xs underline text-terracotta">
+                                            My Profile
+                                            </Link>
+                                
+                                 )}
+
+                                    <button onClick={() => signOut()} className="text-xs bold underline">Logout</button>
                                 </div>
                                </>
                         ) : (
