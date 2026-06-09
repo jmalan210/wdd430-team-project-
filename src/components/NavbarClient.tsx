@@ -63,9 +63,9 @@ export default function NavbarClient() {
                         <Image src="/images/user_icon.svg" alt="user icon" width={40} height={40}></Image>
                         {session ? (
                             <>
-                                <div className="flex flex-col lg:items-end md:items-center">
-                                        <p>{session.user?.email}</p>
-                                        <button onClick={() => signOut()} className="text-s bold underline">Logout</button>
+                                <div className="flex flex-col items-center">
+                                    <p className="text-lg">{session.user?.firstname} {session.user?.lastname}</p>
+                                        <button onClick={() => signOut()} className="text-xs bold underline">Logout</button>
                                 </div>
                                </>
                         ) : (
