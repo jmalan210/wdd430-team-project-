@@ -21,8 +21,15 @@ export default async function page() {
     if (result.rows.length === 0) {
         return <p>No artist profile found.</p>
     }
+    const artist = result.rows[0];
+
+    const productsResult = await pool.query(
+        `select * from products where artist_id = $1`, [artist.id]
+    );
+
+    const products = productsResult.rows
     return (
-        <ArtistDashboard artist={result.rows[0]} />
+        <ArtistDashboard artist={artist} products={products} />
     );
 
 }

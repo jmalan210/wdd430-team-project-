@@ -70,7 +70,7 @@ export default function NavbarClient() {
                                         <Link 
                                             href="/artists/dashboard"
                                             className="text-xs underline text-terracotta">
-                                            My Profile
+                                            Dashboard
                                             </Link>
                                 
                                  )}
