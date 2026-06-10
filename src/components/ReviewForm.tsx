@@ -2,15 +2,21 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation";
 
-export default function ReviewForm({ productId, }: { productId: number; }) {
-    const [rating, setRating] = useState(5);
-    const [reviewText, setReviewText] = useState("");
+export default function ReviewForm({ productId, existingReview }: { productId: number; existingReview?: any }) {
+    const [rating, setRating] = useState(existingReview?.rating || 5);
+    const [reviewText, setReviewText] = useState(existingReview?.review_text || "");
 
     const router = useRouter();
+    const isEdit = !!existingReview;
 
     const handleSave = async () => {
-        const response = await fetch("/api/reviews", {
-            method: "POST",
+        const url = isEdit
+            ? `/api/reviews/${productId}`
+            : `/api/reviews`;
+        
+        const method = isEdit? "PUT" : "POST"
+        const response = await fetch(url, {
+            method,
             headers: {
                 "Content-Type": "application/json",
             },
@@ -21,20 +27,29 @@ export default function ReviewForm({ productId, }: { productId: number; }) {
             }),
         }
             
+       
+            
         );
-        if (response.ok) {
+
+        const data = await response.json();
+        
+        if (response.status === 201) {
             alert("Review Submitted!");
             setReviewText("");
             setRating(5);
             router.refresh();
 
-        } else {
-            
-            console.log(response.status);
-            console.log(await response.text());
-            
-            alert("Failed to submit review");
+        } else if (response.status === 403) {
+            alert(data.message)
+        } else if (response.status === 400) {
+            alert(data.message)
         }
+         else {
+            alert("Something went wrong");
+        }
+        
+           
+        
     };
 
     return (
@@ -64,7 +79,9 @@ export default function ReviewForm({ productId, }: { productId: number; }) {
                 
                 <button
                     onClick={handleSave}
-                className="mt-4 rounded bg-terracotta px-4 py-2 text-ivory">Submit Review</button>
+                    className="mt-4 rounded bg-terracotta px-4 py-2 text-ivory">
+                    {isEdit ? "Update Review" : "Submit Review"}
+                    </button>
             </div>
           
             

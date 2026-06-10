@@ -55,6 +55,17 @@ if (result.rows.length === 0) {
     );
 
     const reviews = reviewsResult.rows;
+
+    const userReviewResult = await pool.query(
+        `
+        SELECT * 
+        FROM reviews
+        WHERE product_id = $1
+        AND user_id = $2`,
+        [productId, session?.user?.id]
+    );
+
+    const userReview = userReviewResult.rows[0] || null;
     
     return (
         <main>
@@ -73,7 +84,7 @@ if (result.rows.length === 0) {
                 
                 <ProductReviews reviews={reviews} />
                 {session ? (
-                    <ReviewForm productId={Number(productId)} />
+                    <ReviewForm productId={Number(productId)} existingReview={userReview} />
                 ) : (
                         <p className="mt-4">Please log in to leave a review</p>
                )}

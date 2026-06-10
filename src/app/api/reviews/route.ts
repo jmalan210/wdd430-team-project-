@@ -22,6 +22,37 @@ export async function POST(req: Request) {
         );
     }
 
+    const productResult = await pool.query(
+        `
+        SELECT artist_id 
+        FROM products
+        WHERE id = $1`, [productId]
+    );
+
+    if (productResult.rows.length === 0) {
+         return NextResponse.json(
+            { message: "Product not found" },
+            { status: 404 }
+        );
+    }
+    const product = productResult.rows[0];
+    const productArtistId = product.artist_id;
+    const artistResult = await pool.query(
+        `
+        SELECT id
+        from artists
+        where user_id = $1`, [session.user.id]
+    );
+
+    const artist = artistResult.rows[0];
+
+    if (artist && artist.id === productArtistId) {
+         return NextResponse.json(
+            { message: "You cannot review your own product" },
+            { status: 403 }
+        );
+    }
+
     await pool.query(
         `INSERT INTO reviews
         ( product_id, user_id, rating, review_text
