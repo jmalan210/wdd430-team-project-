@@ -17,7 +17,13 @@ export default async function Page({
         return <p>Not Authorized</p>
     }
 
+    if (session.user.role !== "artist") {
+        return <p className="text-center text-2xl">Not Authorized</p>;
+    }
+
     const { productId } = await params;
+
+   
 
     const result = await pool.query(
         `

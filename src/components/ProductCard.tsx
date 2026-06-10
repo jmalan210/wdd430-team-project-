@@ -18,6 +18,11 @@ type Props = {
 
 export default function ProductCard({ product }: Props) {
     return (
+        <Link 
+            href={`/products/${product.id}`}
+        className="block h-full"
+        >
+
         <div className="flex flex-col shadow-xl rounded-lg p-4 bg-ivory">
        
             <div >
@@ -43,6 +48,6 @@ export default function ProductCard({ product }: Props) {
                
             </div>
         </div>
-        
+        </Link>
     );
 }

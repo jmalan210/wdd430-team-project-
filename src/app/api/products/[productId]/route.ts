@@ -16,6 +16,10 @@ export async function PUT(
         );
     }
 
+    if (session.user.role !== "artist") {
+        return NextResponse.json({ message: "Not Authorized" });
+    }
+
     const { name, description } = await req.json();
 
     await pool.query(

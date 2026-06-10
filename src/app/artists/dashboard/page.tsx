@@ -6,6 +6,9 @@ export default async function page() {
     const session = await auth();
 
     if (!session) return <p>Not Authorized</p>;
+    if (session.user.role !== "artist") {
+        return <p className="text-center text-xl">Not Authorized</p>
+    }
 
 
     
