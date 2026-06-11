@@ -18,7 +18,7 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
 
             async authorize(credentials) {
 
-                
+                console.log("AUTH_SECRET EXISTS:", !!process.env.AUTH_SECRET);
 
                 const email = credentials?.email as string;
                 const password = credentials?.password as string;
