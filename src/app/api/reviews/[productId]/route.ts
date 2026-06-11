@@ -1,4 +1,4 @@
-import { getToken } from "next-auth/jwt";
+import { auth } from "@/auth";
 import { pool } from "@/lib/db";
 import { NextRequest,NextResponse } from "next/server";
 
@@ -6,12 +6,9 @@ export async function PUT(
     req: NextRequest,
   context: { params: Promise<{ productId: string }> }
 ) {
-    const token = await getToken({
-  req,
-  secret: process.env.AUTH_SECRET,
-});
+    const session = await auth();
 
-    if (!token) {
+    if (!session) {
         return NextResponse.json(
             { message: "Not authorized" },
             { status: 401 }
@@ -26,7 +23,7 @@ export async function PUT(
         review_text = $2
         WHERE product_id= $3
         AND user_id=$4`,
-        [rating, reviewText, productId, token.id]
+        [rating, reviewText, productId, session.user.id]
     );
 
     if (result.rowCount === 0) {
