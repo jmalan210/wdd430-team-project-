@@ -4,7 +4,7 @@ import { NextRequest,NextResponse } from "next/server";
 
 export async function PUT(
     req: NextRequest,
-    { params }: {params: {productId: string}}
+  context: { params: Promise<{ productId: string }> }
 ) {
     const session = await auth();
 
@@ -14,7 +14,7 @@ export async function PUT(
             { status: 401 }
         );
     }
-    const { productId } = params;
+    const { productId } = await context.params;
     const { rating, reviewText } = await req.json();
 
     const result = await pool.query(
