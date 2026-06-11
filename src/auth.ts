@@ -16,13 +16,21 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
             },
 
             async authorize(credentials) {
+
+                console.log("authorize started");
+
                 const email = credentials?.email as string;
                 const password = credentials?.password as string;
+
+                console.log("email exists:", !!email);
 
                 if (!email || !password) {
                     return null;
                 }
                 const user = await getUserByEmail(email);
+
+                console.log("user found:", !!user);
+                
                 if (!user) {
                     return null;
                 }
