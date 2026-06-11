@@ -1,12 +1,12 @@
 
 import { auth } from "@/auth";
 import { pool } from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(
-    req: Request,
+    req: NextRequest,
     { params }: { params: { productId: string }} ){
-    const { productId } = await params
+    const { productId } =  params
     const session = await auth();
 
     if (!session) {
