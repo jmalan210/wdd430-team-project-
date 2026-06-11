@@ -17,7 +17,7 @@ export async function PUT(
     }
 
     if (session.user.role !== "artist") {
-        return NextResponse.json({ message: "Not Authorized" });
+        return NextResponse.json({ message: "Unauthorized" });
     }
 
     const { name, description } = await req.json();
