@@ -6,6 +6,7 @@ import { getUserByEmail } from "@/lib/users";
 
 
 export const { auth, signIn, signOut, handlers } = NextAuth({
+    secret: process.env.AUTH_SECRET,
     providers: [
         Credentials({
             name: "Credentials",
@@ -17,30 +18,30 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
 
             async authorize(credentials) {
 
-                console.log("authorize started");
+                
 
                 const email = credentials?.email as string;
                 const password = credentials?.password as string;
 
-                console.log("email exists:", !!email);
+                
 
-                if (!email || !password) {
+                if (!email || !password) 
                     return null;
-                }
+                
                 const user = await getUserByEmail(email);
 
-                console.log("user found:", !!user);
+               
                 
-                if (!user) {
+                if (!user) 
                     return null;
-                }
+                
                 const passwordsMatch = await bcrypt.compare(
                     password,
                     user.password_hash
                 );
-                if (!passwordsMatch) {
+                if (!passwordsMatch) 
                     return null;
-                }
+                
 
                 return {
                     id: user.id,
@@ -65,7 +66,7 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
             } return token;
         },
         session({ session, token }) {
-            if (!session) return session;
+          
 
             session.user = session.user ?? ({} as any);
             
@@ -74,7 +75,7 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
             session.user.firstname = token.firstname as string;
             session.user.lastname = token.lastname as string;
 
-            // console.log("SESSION AFTER:", session);
+           
             return session;
         },
     },
