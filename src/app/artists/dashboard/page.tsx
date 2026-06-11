@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import ArtistDashboard from "@/components/ArtistDashboard";
 import { pool } from "@/lib/db";
+import { getArtistProducts } from "@/lib/products";
 
 export default async function page() {
     const session = await auth();
@@ -26,11 +27,11 @@ export default async function page() {
     }
     const artist = result.rows[0];
 
-    const productsResult = await pool.query(
-        `select * from products where artist_id = $1`, [artist.id]
-    );
+    // const productsResult = await pool.query(
+    //     `select * from products where artist_id = $1`, [artist.id]
+    // );
 
-    const products = productsResult.rows
+    const products = await getArtistProducts(Number(artist.id));
     return (
         <ArtistDashboard artist={artist} products={products} />
     );
