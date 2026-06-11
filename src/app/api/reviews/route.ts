@@ -1,5 +1,4 @@
 import { auth } from "@/auth";
-import ProductReviews from "@/components/ProductReviews";
 import { pool } from "@/lib/db";
 import { NextResponse } from "next/server";
 
