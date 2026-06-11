@@ -1,40 +1,6 @@
 import { pool } from "./db";
 
-export async function getProducts() {
-    const result = await pool.query(
-        "SELECT * FROM products ORDER BY name DESC"
-    )
-    return result.rows;
-}
 
-export async function getProductsWithImages(productIds: number[], sort: string = "id") {
-    if (!productIds.length) return [];
-    const orderBy = getOrderBy(sort);
-    const result = await pool.query( `
-        SELECT
-        p.id,
-        p.name,
-        p.price,
-        p.artist_id,
-        p.description,
-        a.business_name,
-        a.medium,
-        COALESCE(
-        ARRAY_AGG(pi.image_url) FILTER (WHERE pi.image_url IS NOT NULL),
-        ARRAY[]::text[]
-        ) AS images
-         FROM products p
-         JOIN artists a
-         on p.artist_id = a.id
-         LEFT JOIN product_images pi
-         on p.id = pi.product_id
-         WHERE p.id = ANY($1)
-         GROUP BY p.id, p.name, p.price, p.artist_id, description, a.business_name, a.medium
-         ORDER BY ${orderBy}
-    `, [productIds]
-    );
-    return result.rows
-}
 
 export async function getArtistProducts(artistId: number) {
     const result = 
@@ -80,8 +46,55 @@ function getOrderBy(sort?: string) {
     }
 }
 
-export async function getAllProductsWithImages(sort: string = "id") {
+export async function getAllProducts(sort: string = "id") {
+    
     const orderBy = getOrderBy(sort);
+        
+        const result = await pool.query(
+            `SELECT
+        p.id,
+        p.name,
+        p.price,
+        p.artist_id,
+        p.description,
+        a.business_name,
+        a.medium,
+
+        COALESCE(img.images, ARRAY[]::text[]) AS images,
+        COALESCE(rev.average_rating, 0) AS average_rating,
+        COALESCE(rev.review_count, 0) AS review_count
+
+         FROM products p
+         JOIN artists a
+         on p.artist_id = a.id
+
+         LEFT JOIN (
+         SELECT product_id,
+         ARRAY_AGG(image_url) AS images
+         FROM product_images
+         GROUP BY product_id) img
+        ON img.product_id = p.id
+
+         LEFT JOIN (
+         SELECT
+            product_id,
+            ROUND(AVG(rating)::numeric, 1) AS average_rating,
+            COUNT(*)::int AS review_count
+            FROM reviews
+            GROUP BY product_id) rev
+            ON rev.product_id=p.id
+        
+         ORDER BY ${orderBy}
+        `,
+            
+        );
+
+        return result.rows;
+    }
+    
+export async function getProductsByIds(productIds: number[]) {
+    if (!productIds.length) return [];
+
     const result = await pool.query(
         `SELECT
         p.id,
@@ -91,19 +104,35 @@ export async function getAllProductsWithImages(sort: string = "id") {
         p.description,
         a.business_name,
         a.medium,
-        COALESCE(
-        ARRAY_AGG(pi.image_url) FILTER (WHERE pi.image_url IS NOT NULL),
-        ARRAY[]::text[]
-        ) AS images
+
+        COALESCE(img.images, ARRAY[]::text[]) AS images,
+        COALESCE(rev.average_rating, 0) AS average_rating,
+        COALESCE(rev.review_count, 0) AS review_count
+
          FROM products p
          JOIN artists a
          on p.artist_id = a.id
-         LEFT JOIN product_images pi
-         on p.id = pi.product_id       
-         GROUP BY p.id, p.name, p.price, p.artist_id, description, a.business_name, a.medium
-         ORDER BY ${orderBy}
-        `
-    );
 
+         LEFT JOIN (
+         SELECT product_id,
+         ARRAY_AGG(image_url) AS images
+         FROM product_images
+         GROUP BY product_id) img
+        ON img.product_id = p.id
+
+         LEFT JOIN (
+         SELECT
+            product_id,
+            ROUND(AVG(rating)::numeric, 1) AS average_rating,
+            COUNT(*)::int AS review_count
+            FROM reviews
+            GROUP BY product_id) rev
+            ON rev.product_id=p.id
+         
+        WHERE p.id = ANY($1)`,
+        [productIds]
+
+    );
     return result.rows;
 }
+

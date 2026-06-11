@@ -3,13 +3,18 @@ import { useState } from "react"
 import { useRouter } from "next/navigation";
 
 export default function ReviewForm({ productId, existingReview }: { productId: number; existingReview?: any }) {
-    const [rating, setRating] = useState(existingReview?.rating || 5);
+    const [rating, setRating] = useState(existingReview?.rating || 0);
     const [reviewText, setReviewText] = useState(existingReview?.review_text || "");
+    const [hoveredStar, setHoveredStar] = useState(0);
 
     const router = useRouter();
     const isEdit = !!existingReview;
 
     const handleSave = async () => {
+         if (rating === 0) {
+            alert("Please select a rating");
+            return
+        }
         const url = isEdit
             ? `/api/reviews/${productId}`
             : `/api/reviews`;
@@ -25,6 +30,7 @@ export default function ReviewForm({ productId, existingReview }: { productId: n
                 rating,
                 reviewText,
             }),
+            
         }
             
        
@@ -43,7 +49,7 @@ export default function ReviewForm({ productId, existingReview }: { productId: n
             alert(data.message)
         } else if (response.status === 400) {
             alert(data.message)
-        }
+        } 
          else {
             alert("Something went wrong");
         }
@@ -59,17 +65,28 @@ export default function ReviewForm({ productId, existingReview }: { productId: n
             </h2>
             <div className="flex flex-col lg:w-1/2">
                 <label htmlFor="rating">Rating</label>
-                <select
-                    value={rating}
-                    onChange={(e) => setRating(Number(e.target.value))}
-                    className="border p-2"
-                >
-                    <option value={5}>5 Stars</option>
-                    <option value={4}>4 Stars</option>
-                    <option value={3}>3 Stars</option>
-                    <option value={2}>2 Stars</option>
-                    <option value={1}>1 Stars</option>
-                </select>
+               
+
+                <div className="flex gap-1 text-4xl">
+                    {[1, 2, 3, 4, 5].map((star) => {
+                        const filled = star <= (hoveredStar || rating);
+                        return (
+                            <button
+                                key={star}
+                                type="button"
+                                onClick={() => setRating(star)}
+                                onMouseEnter={() => setHoveredStar(star)}
+                                onMouseLeave={() => setHoveredStar(0)}
+                                className={filled ? "cursor-pointer text-yellow-500" : "cursor-pointer text-gray-300"}
+                            >
+                                {star <= (hoveredStar || rating)
+                                    ? "★"
+                                    : "☆"}
+                            </button>
+                        );
+                    })}
+                </div>
+                <p>{rating} out of 5 stars</p>
 
                 <label htmlFor="review">Review</label>
                 <textarea value={reviewText}

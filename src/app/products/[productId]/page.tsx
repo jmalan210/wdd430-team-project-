@@ -1,9 +1,10 @@
-import { pool } from "@/lib/db";
 import Image from "next/image";
-import Link from "next/link";
 import ProductReviews from "@/components/ProductReviews";
 import ReviewForm from "@/components/ReviewForm";
 import { auth } from "@/auth";
+import { getProductsById } from "@/lib/products";
+import { getProductReviews, getUserReview } from "@/lib/reviews";
+import RatingDisplay from "@/components/RatingDisplay";
 
 
 
@@ -15,57 +16,17 @@ export default async function Page({
     const session = await auth();
     const { productId } = await params
 
-    const result = await pool.query(
-    `
-    SELECT p.*,
-    a.first_name,
-    a.last_name,
-    a.business_name,
-    pi.image_url,
-    pi.alt_text
-    FROM products p
-    LEFT JOIN product_images pi
-    on p.id = pi.product_id
-    JOIN artists a
-    ON p.artist_id = a.id
+    const product = await getProductsById(Number(productId));
+    if (!product) {
+        return <p>Product not found</p>
+    }
 
-    WHERE p.id = $1
-    `, [productId]
-);
+    const reviews = await getProductReviews(Number(productId));
 
-if (result.rows.length === 0) {
-    return <p>Product not found</p>
-}
-
-    const product = result.rows[0];
-    // console.log(product);
-
-    const reviewsResult = await pool.query(
-        `
-        SELECT
-        r.*,
-        u.firstname,
-        u.lastname
-        FROM reviews r
-        JOIN users u
-        on r.user_id = u.id
-        WHERE r.product_id = $1
-        ORDER BY r.created_at DESC`,
-        [productId]
-    );
-
-    const reviews = reviewsResult.rows;
-
-    const userReviewResult = await pool.query(
-        `
-        SELECT * 
-        FROM reviews
-        WHERE product_id = $1
-        AND user_id = $2`,
-        [productId, session?.user?.id]
-    );
-
-    const userReview = userReviewResult.rows[0] || null;
+    const userReview = await getUserReview(
+        Number(productId),
+        session?.user?.id
+    )
     
     return (
         <main>
@@ -76,11 +37,16 @@ if (result.rows.length === 0) {
                 
                 <Image src={`/${product.image_url}`} alt={product.alt_text} width={800} height={1000} className="w-full h-auto max-w-lg" />
                 <p className="italic">{`$${product.price}`}</p>
-                <p>{product.description}</p>
-
+                <RatingDisplay
+                    rating={product.average_rating}
+                    count={product.review_count} />
+                <p className="justify-center align-middle line-clamp-3">{product.description}</p>
+              
+            
             </div>
 
-            <div>
+
+            <div className="flex flex-col items-center border-2 m-0-auto">
                 
                 <ProductReviews reviews={reviews} />
                 {session ? (

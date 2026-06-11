@@ -15,6 +15,13 @@ export async function POST(req: Request) {
 
     const { productId, rating, reviewText } = await req.json();
 
+    if (rating < 1 || rating > 5) {
+        return NextResponse.json(
+            { message: "Rating must be between 1 and 5" },
+            {status: 400}
+        )
+    }
+
     if (!reviewText.trim()) {
         return NextResponse.json(
             { message: "Review text is required" },
@@ -53,6 +60,8 @@ export async function POST(req: Request) {
         );
     }
 
+    
+
     await pool.query(
         `INSERT INTO reviews
         ( product_id, user_id, rating, review_text
@@ -69,7 +78,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(
         {
-            message: "Review created"
+            message: "Review saved"
             
         },
         { status: 201 }

@@ -1,6 +1,6 @@
 import ProductCard from "@/components/ProductCard";
 import QueryDropDown from "@/components/QueryDropdown";
-import { getAllProductsWithImages } from "@/lib/products";
+import { getAllProducts } from "@/lib/products";
 
 
 export default async function ProductsPage({ searchParams, }: {
@@ -9,7 +9,7 @@ export default async function ProductsPage({ searchParams, }: {
     
     const { sort } = await searchParams;
     const finalSort = sort || "id";
-    const products = await getAllProductsWithImages(finalSort);
+    const products = await getAllProducts(finalSort);
 
     return (
         <main className="p-8">

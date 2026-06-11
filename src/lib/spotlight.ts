@@ -1,5 +1,5 @@
 import { pool } from "./db";
-import { getArtistProducts, getProductsWithImages } from "./products";
+import {  getProductsByIds } from "./products";
 
 function getBucket() {
     return Math.floor(Date.now() / (1000 * 60 * 60 * 6)); //refreshes every 6 hours
@@ -49,13 +49,12 @@ export async function getSpotlightProducts() {
     const existing = await pool.query(
         "SELECT product_ids FROM product_spotlight WHERE bucket = $1", [bucket]
     );
-    let productIds = existing.rows[0]?.product_ids;
-    
+    let productIds: number[] = existing.rows[0]?.product_ids;
 
-    if (!productIds?.length) {
+    if (!Array.isArray(productIds) || productIds.length === 0) {
         const ids = (await pool.query(`select id from products`)
         ).rows.map(r => r.id);
-       
+    
         productIds = shuffle(ids).slice(0, 1);
 
          await pool.query(
@@ -68,7 +67,7 @@ export async function getSpotlightProducts() {
 
     );
     }
-    return getProductsWithImages(productIds);
+    return getProductsByIds(productIds);
 }
 
 export async function getProductFeed() {
@@ -77,5 +76,5 @@ export async function getProductFeed() {
             `select id from products order by name desc`
         )
     ).rows.map(r => r.id);
-    return getProductsWithImages(ids);
+    return getProductsByIds(ids);
 }
