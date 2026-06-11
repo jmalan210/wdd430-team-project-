@@ -1,11 +1,14 @@
-import { auth } from "@/auth";
+import { getToken } from "next-auth/jwt";
 import { pool } from "@/lib/db";
 import { NextRequest,NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-    const session = await auth();
+    const token = await getToken({
+  req,
+  secret: process.env.AUTH_SECRET,
+});
 
-    if (!session) {
+    if (!token) {
         return NextResponse.json(
             { message: "Not authorized" },
             { status: 401 }
@@ -47,7 +50,7 @@ export async function POST(req: NextRequest) {
         `
         SELECT id
         from artists
-        where user_id = $1`, [session.user.id]
+        where user_id = $1`, [token.id]
     );
 
     const artist = artistResult.rows[0];
@@ -72,7 +75,7 @@ export async function POST(req: NextRequest) {
         review_text = EXCLUDED.review_text;
         
         `,
-        [productId, session.user.id, rating, reviewText]
+        [productId, token.id, rating, reviewText]
     );
 
     return NextResponse.json(

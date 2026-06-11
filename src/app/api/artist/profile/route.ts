@@ -1,19 +1,19 @@
 import ArtistsPage from "@/app/artists/page";
-import { auth } from "@/auth";
+import { getToken } from "next-auth/jwt";
 import { pool } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(req: NextRequest) {
-    const session = await auth();
+    const token = await getToken({ req, secret: process.env.AUTH_SECRET });
 
-    if (!session) {
+    if (!token) {
         return NextResponse.json(
             { message: "Unauthorized" },
             { status: 401 }
         );
     }
 
-    if (session.user.role !== "artist") {
+    if (token.role !== "artist") {
         return NextResponse.json({ message: "Not Authorized" });
     }
 
@@ -27,7 +27,7 @@ export async function PUT(req: NextRequest) {
         business_name = $3
         where user_id = $4
         `,
-        [bio, medium, businessName, session.user.id]
+        [bio, medium, businessName, token.id]
     );
 
     return NextResponse.json({ message: "Profile updated" });

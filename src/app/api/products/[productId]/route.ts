@@ -1,5 +1,5 @@
 
-import { auth } from "@/auth";
+import { getToken } from "next-auth/jwt";
 import { pool } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -7,16 +7,19 @@ export async function PUT(
     req: NextRequest,
     { params }: { params: Promise<{ productId: string }>} ){
     const { productId } = await params
-    const session = await auth();
+    const token = await getToken({
+  req,
+  secret: process.env.AUTH_SECRET,
+});
 
-    if (!session) {
+    if (!token) {
         return NextResponse.json(
             { message: "Unauthorized" },
             { status: 401 }
         );
     }
 
-    if (session.user.role !== "artist") {
+    if (token.role !== "artist") {
         return NextResponse.json({ message: "Unauthorized" });
     }
 
