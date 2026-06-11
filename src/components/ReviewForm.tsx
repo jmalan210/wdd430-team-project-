@@ -41,8 +41,8 @@ export default function ReviewForm({ productId, existingReview }: { productId: n
         
         if (response.ok) {
             alert("Review Submitted!");
-            setReviewText(data.reviewText);
-            setRating(data.rating);
+            setReviewText("");
+            setRating(0);
             router.refresh();
 
         } else if (response.status === 403) {

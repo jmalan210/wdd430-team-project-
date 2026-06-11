@@ -63,7 +63,7 @@ export default function ArtistDashboard({ artist, products, }: any) {
                                 key={product.id}>
                                 <p className="">{product.name}</p>
                                 <p className="italic">{product.description}</p>
-                                <Link href={`/products/edit/${product.id}`}className="text-terracotta underline">Edit Product</Link>
+                                <Link href={`/products/edit/${product.id}`}className="text-terracotta underline">Edit Product Description</Link>
                             </div>
                         ))}
                
