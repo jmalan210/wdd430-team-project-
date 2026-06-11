@@ -39,11 +39,11 @@ export default function ReviewForm({ productId, existingReview }: { productId: n
 
         const data = await response.json();
         
-        if (response.status === 201) {
+        if (response.ok) {
             alert("Review Submitted!");
-            setReviewText("");
-            setRating(5);
-            router.refresh();
+            setReviewText(data.reviewText);
+            setRating(data.rating);
+            // router.refresh();
 
         } else if (response.status === 403) {
             alert(data.message)
