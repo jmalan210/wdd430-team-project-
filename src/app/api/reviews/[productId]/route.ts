@@ -1,10 +1,9 @@
 import { auth } from "@/auth";
-import ProductReviews from "@/components/ProductReviews";
 import { pool } from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest,NextResponse } from "next/server";
 
 export async function PUT(
-    req: Request,
+    req: NextRequest,
     { params }: {params: {productId: string}}
 ) {
     const session = await auth();

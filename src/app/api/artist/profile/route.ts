@@ -1,9 +1,9 @@
 import ArtistsPage from "@/app/artists/page";
 import { auth } from "@/auth";
 import { pool } from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
     const session = await auth();
 
     if (!session) {

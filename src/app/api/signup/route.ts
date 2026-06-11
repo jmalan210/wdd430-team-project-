@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextRequest,NextResponse } from "next/server";
 import { createUser } from "@/lib/users";
 import bcrypt from "bcrypt";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
     console.log("Signup Route Hit");
 
     const formData = await req.formData();
