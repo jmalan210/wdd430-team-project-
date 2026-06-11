@@ -136,3 +136,36 @@ export async function getProductsByIds(productIds: number[]) {
     return result.rows;
 }
 
+export async function getProductsById(productId: number) {
+    
+    const result = await pool.query(
+    `
+    SELECT p.*,
+    a.first_name,
+    a.last_name,
+    a.business_name,
+    pi.image_url,
+    pi.alt_text,
+    COALESCE(AVG(r.rating), 0):: float as average_rating,
+    COUNT(r.id)::integer as review_count
+    FROM products p
+    LEFT JOIN product_images pi
+    on p.id = pi.product_id
+    JOIN artists a
+    ON p.artist_id = a.id
+    LEFT JOIN reviews r
+    on p.id = r.product_id
+    WHERE p.id = $1
+    GROUP BY
+        p.id,
+        a.first_name,
+        a.last_name,
+        a.business_name,
+        pi.image_url,
+        pi.alt_text
+
+   
+    `, [productId]
+    );
+    return result.rows[0] ?? null;
+}
