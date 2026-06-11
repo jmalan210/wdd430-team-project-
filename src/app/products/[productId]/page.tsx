@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import ProductReviews from "@/components/ProductReviews";
 import ReviewForm from "@/components/ReviewForm";
 import { auth } from "@/auth";
@@ -29,11 +30,12 @@ export default async function Page({
     )
     
     return (
-        <main>
+        <main className="grid md:grid-cols-3 gap-4 m-4">
+            <div className="border-2 border-navy rounded-lg col-span-2 ">
             <h1 className="text-center text-3xl">{product.name}</h1>
             <h2 className="text-center text-xl text-terracotta">by {product.first_name} {product.last_name} of {product.business_name}</h2>
             
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center p-4">
                 
                 <Image src={`/${product.image_url}`} alt={product.alt_text} width={800} height={1000} className="w-full h-auto max-w-lg" />
                 <p className="italic">{`$${product.price}`}</p>
@@ -41,19 +43,21 @@ export default async function Page({
                     rating={product.average_rating}
                     count={product.review_count} />
                 <p className="justify-center align-middle line-clamp-3">{product.description}</p>
-              
+              </div>
             
             </div>
 
 
-            <div className="flex flex-col items-center border-2 m-0-auto">
+            <div className="flex flex-col gap-4 border-2 border-navy rounded-lg flex-1">
                 
                 <ProductReviews reviews={reviews} />
                 {session ? (
                     <ReviewForm productId={Number(productId)} existingReview={userReview} />
                 ) : (
-                        <p className="mt-4">Please log in to leave a review</p>
+                        <p className="mt-4 p-4">Please <Link href="/login" className="font-bold text-terracotta underline">log in </Link> to leave a review</p>
                )}
+                               
+                               
                 
                 
             </div>

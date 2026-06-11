@@ -60,10 +60,10 @@ export default function ReviewForm({ productId, existingReview }: { productId: n
 
     return (
         <main>
-            <h2>
+            <h2 className="font-bold text-3xl text-center">
                 Leave a Review
             </h2>
-            <div className="flex flex-col lg:w-1/2">
+            <div className="flex flex-col items-center">
                 <label htmlFor="rating">Rating</label>
                
 
@@ -86,19 +86,21 @@ export default function ReviewForm({ productId, existingReview }: { productId: n
                         );
                     })}
                 </div>
+                <div className="flex flex-col w-full max-w-2xl mx auto p-4">
                 <p>{rating} out of 5 stars</p>
 
                 <label htmlFor="review">Review</label>
                 <textarea value={reviewText}
                     onChange={(e) => setReviewText(e.target.value)}
                     rows={5}
-                    className="border-2 p-2" />
+                    className="border-2 p-2 w-full" />
                 
                 <button
                     onClick={handleSave}
-                    className="mt-4 rounded bg-terracotta px-4 py-2 text-ivory">
+                    className="mt-4 rounded bg-terracotta px-4 py-2 text-ivory w-1/2 self-center my-4">
                     {isEdit ? "Update Review" : "Submit Review"}
                     </button>
+                    </div>
             </div>
           
             

@@ -10,8 +10,7 @@ export default function RatingDisplay({
                         {"★".repeat(Math.round(rating))}
                         {"☆".repeat(5-Math.round(rating))}
                     </div>
-                    <p>{Number(rating).toFixed(1)}
-                        ({count} reviews)
+                    <p>{Number(rating).toFixed(1)} ({count} reviews)
             </p>
             </div>
     )
