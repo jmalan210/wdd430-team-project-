@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function PUT(
     req: Request,
-    { params }: { params: Promise<{ productId: string }> } ){
+    { params }: { params: { productId: string }} ){
     const { productId } = await params
     const session = await auth();
 
