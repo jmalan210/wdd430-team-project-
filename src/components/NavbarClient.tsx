@@ -45,7 +45,7 @@ export default function NavbarClient() {
 
     
     return (
-        <nav className="w-full bg-navy text-ivory">
+        <nav className="w-full bg-gradient-to-r from-navy via-sage to-terracotta text-ivory">
 
             {/* ------BRANDING------- */}
             <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
@@ -155,7 +155,6 @@ export default function NavbarClient() {
                     </div>
                 </div>
             )}
-          <div className="h-[10px] bg-[linear-gradient(to_right,#f9f6f0,#2b4b64,#788E79,#935739)] shadow-sm" />  
     </nav>
     )
 }

@@ -14,7 +14,8 @@ export default async function ProductsPage({ searchParams, }: {
     return (
         <main className="p-8">
         
-            <h1 className="text-4xl font-bold mb-6" >Products</h1>
+            <h1 className="text-4xl font-bold mb-6 text-center bg-gradient-to-l from-navy via-sage to-terracotta text-ivory py-2" >Products</h1>
+            <p>Sort by</p>
             <QueryDropDown
                 options={[
                     { label: "Name", value: "name" },

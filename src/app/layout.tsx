@@ -29,7 +29,7 @@ export default function RootLayout({ children, }: {
       lang="en"
       className={`${headingFont.variable} ${bodyFont.variable} h-full antialiased`}
     >
-      <body className="font-body text-navy">
+      <body className="font-body text-navy bg-ivory">
         <Providers>
         <Navbar />
         {children}
