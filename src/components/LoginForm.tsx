@@ -1,0 +1,65 @@
+"use client";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import type { FormEvent } from "react";
+import { useState } from "react";
+
+export default function LoginForm() {
+    const router = useRouter();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+
+    async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        setError("");
+
+        const res = await signIn("credentials", {
+            email,
+            password,
+            redirect: false
+            
+        });
+
+        if (res?.error) {
+            setError("Invalid email or password");
+            return;
+        }
+        router.push("/");
+        router.refresh();
+    }
+    return (
+        <div>
+    <form onSubmit={handleSubmit}
+        className="flex flex-col gap-4 p-6 border rounded-lg w-80">
+        <h1>Login</h1>
+        <input type="email"
+            placeholder="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="border p-2"
+            required
+        />
+        <input type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="border p-2"
+            required
+        />
+
+        {error && (
+            <p className="text-red-500 text-sm">{error}</p>
+        )}
+        <button type="submit"
+            className="bg-terracotta text-white p-2 rounded-lg">Log in</button>
+        </form>
+         <div className="flex flex-col items-center my-4 min-h-screen">
+                
+                <Link href="/signup">Create a new account</Link>
+            </div>
+            </div>
+        
+    
+)}

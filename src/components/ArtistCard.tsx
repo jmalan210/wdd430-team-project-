@@ -17,6 +17,7 @@ export default function ArtistCard({artist}: any) {
                         <Image src={artist.image_url}
                             alt={`${artist.first_name} ${artist.last_name}`}
                             fill
+                            sizes="(max-width: 768px) 100vs, 33vw"
                             className="object-cover rounded-lg shadow-lg border-4 border-white" />
                     </div>    
                     

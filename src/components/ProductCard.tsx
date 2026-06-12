@@ -42,7 +42,8 @@ export default function ProductCard({ product }: Props) {
                         key={index}
                         src={`/${url}`}
                         alt={product.name}
-                        fill
+                         fill
+                         sizes="(max-width: 768px) 100vs, 33vw"
                         className="object-cover rounded-lg"
                     />
                 ))}
