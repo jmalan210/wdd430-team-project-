@@ -33,8 +33,8 @@ export default function NavbarClient() {
     
     const linkClass = (path: string) => {
        return pathname === path
-            ? "md:text-terracotta font-semibold border-b-2 border-terracotta pb-1"
-            : "border-b-2 border-transparent hover:text-terracotta pb-1"
+            ? "md:text-navy md:bg-ivory font-semibold p-2 rounded-lg"
+            : "hover:text-navy hover:bg-ivory p-2 rounded-lg"
     }
 
     const mobileLinkClass = (path: string) => {
@@ -45,7 +45,7 @@ export default function NavbarClient() {
 
     
     return (
-        <nav className="w-full border-b-8 border-sage/70 bg-ivory text-navy">
+        <nav className="w-full bg-navy text-ivory">
             <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
                 <div className="flex items-center gap-3">
                     <Image src="/images/logo.svg" alt="Handcrafted Haven Logo" width={80} height={80} className="h-20 w-auto" />
@@ -118,6 +118,7 @@ export default function NavbarClient() {
                     </div>
                 </div>
             )}
+          <div className="h-[10px] bg-[linear-gradient(to_right,#f9f6f0,#2b4b64,#788E79,#935739)] shadow-sm" />  
     </nav>
     )
 }

@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       colors: {
         terracotta: '#935739',
-        sage: '#4a594b',
+        sage: '#788E79',
         navy: '#2b4b64',
         ivory: '#f9f6f0'
       },
