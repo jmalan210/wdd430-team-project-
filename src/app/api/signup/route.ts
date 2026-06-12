@@ -7,12 +7,13 @@ export async function POST(req: NextRequest) {
 
     const formData = await req.formData();
 
-    
+    const firstName = formData.get("firstName") as string
+    const lastName = formData.get("lastName") as string
     const email = formData.get("email") as string
     const password = formData.get("password") as string
     const confirmPassword = formData.get("confirmPassword")
     
-    if (!email || !password) {
+    if (!firstName || !lastName || !email || !password) {
         return NextResponse.json(
             { error: "Missing fields" },
             {status: 400}
@@ -28,9 +29,9 @@ export async function POST(req: NextRequest) {
 
     try {
         const passwordHash = await bcrypt.hash(password, 10);
-        await createUser(email, passwordHash);
-        return NextResponse.json({ message: "User created successfully!" });
-
+        await createUser(firstName, lastName, email, passwordHash);
+        return NextResponse.redirect(new URL("/login?signup=success", req.url))
+       
     } catch (err: any) {
         if (err.code === "23505") {
             return NextResponse.json(

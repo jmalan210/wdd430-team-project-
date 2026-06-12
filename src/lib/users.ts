@@ -1,10 +1,10 @@
 import { pool } from "@/lib/db";
 
-export async function createUser(email: string, passwordHash: string) {
+export async function createUser(firstName: string, lastName: string, email: string, passwordHash: string) {
     return pool.query(
-        `INSERT INTO users (email, password_hash, role)
-        VALUES ($1, $2, 'user')`, 
-        [email, passwordHash]
+        `INSERT INTO users (firstname, lastname, email, password_hash, role)
+        VALUES ($1, $2, $3, $4, 'user')`, 
+        [firstName, lastName, email, passwordHash]
     );
 }
 
