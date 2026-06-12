@@ -39,44 +39,54 @@ export default function NavbarClient() {
 
     const mobileLinkClass = (path: string) => {
         return pathname === path
-        ?"text-white bg-terracotta p-3 font-semibold px-4 py3"
-        : "px-4 py-3 hover:bg-terracotta hover:text-white"
+        ?"text-ivory bg-navy p-3 font-semibold px-4 py-3"
+        : "px-4 py-3 hover:bg-terracotta hover:text-ivory"
     }
 
     
     return (
         <nav className="w-full bg-navy text-ivory">
-            <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+
+            {/* ------BRANDING------- */}
+            <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
                 <div className="flex items-center gap-3">
-                    <Image src="/images/logo.svg" alt="Handcrafted Haven Logo" width={80} height={80} className="h-20 w-auto" />
+                    <Image src="/images/logo.svg" alt="Handcrafted Haven Logo" width={80} height={80} className="h-12 w-auto md:h-16 lg:h-20" />
                     <div className="leading-tight">
-                    <Link href='/' className="text-3xl md:text-5xl lg:text-5xl font-bold font-heading tracking-wide">Handcrafted Haven</Link>
+                    <Link href='/' className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold font-heading tracking-wide">Handcrafted Haven</Link>
                     <p className="hidden md:block text-sm italic">Where artisans and admirers come together</p>
                     </div>
                 </div>
+
+                {/* -------NAVIGATION-----------   */}
                 
+                 <div className="hidden lg:flex gap-6 text-l font-medium">
+                <Link href="/" className={linkClass("/")}>Home</Link>
+                <Link href="/artists" className={linkClass("/artists")}>Artists</Link>
+                    <Link href="/products" className={linkClass("/products")} >Products</Link>
+                    </div>
                
                 <div className="flex flex-col gap-6 justify-end" >
 
-                {/*user controls */}
-                    <div className="flex flex-col md:flex-row items-center gap-2">
+                {/*-----USER---------*/}
+                    <div className="hidden lg:flex items-center gap-4">
                         <Image src="/images/user_icon.svg" alt="user icon" width={40} height={40}></Image>
                         {session ? (
                             <>
-                                <div className="flex flex-col items-center gap-1">
-                                    <p className="text-lg">{session.user?.firstname} {session.user?.lastname}</p>
-
+                                <div className="flex flex-col items-end gap-1">
+                                    
+                                    <p className="hidden sm:block">{session.user?.firstname} {session.user?.lastname}</p>
+                                <div className="flex gap-2 text xs">
                                     {session?.user?.role === "artist" && (
                                         <Link 
                                             href="/artists/dashboard"
-                                            className="text-xs underline text-terracotta">
+                                            className="text-xs underline text-ivory">
                                             Dashboard
                                             </Link>
-                                
                                  )}
 
                                     <button onClick={() => signOut()} className="text-xs bold underline">Logout</button>
-                                </div>
+                                    </div>
+                                    </div>
                                </>
                         ) : (
                             <Link href="/login">
@@ -84,9 +94,11 @@ export default function NavbarClient() {
                                 </Link>
                              
                         )}
+                        
+
                     </div>
 
-                    {/*Menu Desktop View */}
+                    
                      <button
                     className="lg:hidden text-3xl"
                     onClick={() => setMenuOpen(!menuOpen)
@@ -96,12 +108,7 @@ export default function NavbarClient() {
                     {menuOpen ? "✕" : "☰"}
                    
                 </button>
-
-            <div className="hidden lg:flex gap-6 text-l font-medium">
-                <Link href="/" className={linkClass("/")}>Home</Link>
-                <Link href="/artists" className={linkClass("/artists")}>Artists</Link>
-                    <Link href="/products" className={linkClass("/products")}>Products</Link>
-                    </div>
+           
                     
                 </div>
             </div>
@@ -109,8 +116,38 @@ export default function NavbarClient() {
             {/* Menu Mobile View*/}
             {menuOpen && (
                 
-                <div className="lg:hidden border-t border-sage bg-ivory">
+                <div className="lg:hidden border-t border-sage bg-ivory text-navy">
                     <div className="flex flex-col px-6 py-4 space-y-4 text-lg">
+
+                        {session && (
+                            <>
+                                <p className="font-semibold text-lg">
+                                    {session.user?.firstname} {session.user?.lastname}
+                                </p>
+                                
+                                {session.user?.role === "artist" && (
+                                    <Link
+                                        href="/artists/dashboard"
+                                        className="py-2 text-terracotta"
+                                    >
+                                        Dashboard
+                                    </Link>
+                                )}
+                                
+                                <button onClick={() => signOut()} className="py-2 text-left text-terracotta">Logout</button>
+                            </>
+                        )}
+                        {!session && (
+                            <>
+                                <Link
+                                    href="/login"
+                                    className="py-2 text-terracotta"
+                                > Log In / Sign Up</Link>
+
+                                <hr className="my-3 border-sage"/>
+                                
+                            </>
+                        )}
                         <Link href="/" className={`px-6 py3 ${mobileLinkClass("/")}`}>Home</Link>
                 <Link href="/artists" className={`px-6 py3 ${mobileLinkClass("/artists")}`}>Artists</Link>
                 <Link href="/products" className={`px-6 py3 ${mobileLinkClass("/products")}`}>Products</Link>

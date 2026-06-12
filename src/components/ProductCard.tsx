@@ -44,7 +44,7 @@ export default function ProductCard({ product }: Props) {
                         alt={product.name}
                          fill
                          sizes="(max-width: 768px) 100vs, 33vw"
-                        className="object-cover rounded-lg"
+                        className="object-contain rounded-lg"
                     />
                 ))}
             </div>
