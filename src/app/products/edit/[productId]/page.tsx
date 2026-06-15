@@ -21,6 +21,7 @@ export default async function Page({
         return <p className="text-center text-2xl">Not Authorized</p>;
     }
 
+    
     const { productId } = await params;
 
    

@@ -137,7 +137,7 @@ export async function createProduct({ artistId, name, description, price, imageU
         await client.query("BEGIN");
 
         if (!imageUrl) {
-            throw new Error("Image URL is required");
+            imageUrl = "/images/placeholder.svg";
         }
         const productResult = await client.query(
             `

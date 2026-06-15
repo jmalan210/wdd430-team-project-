@@ -28,6 +28,7 @@ export default function ProductForm({
         let imageUrl = "";
 
         try {
+            console.log("selected image:", image);
             if (image) {
                 const formData = new FormData();
                 formData.append("file", image);
@@ -38,6 +39,8 @@ export default function ProductForm({
                 });
 
                 const uploadData = await uploadRes.json();
+                console.log("uploadData:", uploadData);
+                console.log("imageUrl after upload:", uploadData.url);
 
                 if (!uploadRes.ok) {
                     setError("Image upload failed")

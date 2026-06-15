@@ -21,13 +21,16 @@ export async function POST(req: Request) {
 
     try {
         const body = await req.json();
+        let imageUrl = body.image_url;
 
+        const finalImageUrl = imageUrl || "/images/placeholder.svg"
+       
         const product = await createProduct({
             artistId: Number(body.artist_id),
             name: body.name,
             description: body.description,
             price: Number(body.price),
-            imageUrl: body.image_url,
+            imageUrl: finalImageUrl,
         });
 
         return NextResponse.json(product, { status: 201 });

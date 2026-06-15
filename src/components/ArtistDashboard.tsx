@@ -123,7 +123,7 @@ export default function ArtistDashboard({ artist, products, }: any) {
                                     </div>
                
                                     <p className="italic">{product.description}</p>
-                                    <Link href={`/products/edit/${product.id}`} className="text-terracotta underline">Edit Product Description</Link>
+                                    <Link href={`/products/edit/${product.id}`} className="text-terracotta underline">Edit Product</Link>
                                 </div>
                             ))}
                

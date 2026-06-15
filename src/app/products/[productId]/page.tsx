@@ -27,6 +27,8 @@ export default async function Page({
     const userReview = await getUserReview(
         Number(productId),
         session?.user?.id
+
+        
     )
     
     return (
@@ -35,9 +37,10 @@ export default async function Page({
             <h1 className="text-center text-3xl">{product.name}</h1>
             <h2 className="text-center text-xl text-terracotta">by {product.first_name} {product.last_name} of {product.business_name}</h2>
             
-            <div className="flex flex-col items-center p-4">
+                <div className="flex flex-col items-center p-4">
+                    
                 
-                <Image src={product.image_url} alt={product.alt_text} width={800} height={1000} className="w-full h-auto max-w-lg" />
+                <Image src={product.image_url || "/images/placeholder.svg"} alt={product.alt_text} width={300} height={300} className="w-full h-auto max-w-md" />
                 <p className="italic">{`$${product.price}`}</p>
                 <RatingDisplay
                     rating={product.average_rating}

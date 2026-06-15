@@ -27,10 +27,7 @@ export default async function page() {
     }
     const artist = result.rows[0];
 
-    // const productsResult = await pool.query(
-    //     `select * from products where artist_id = $1`, [artist.id]
-    // );
-
+    
     const products = await getArtistProducts(Number(artist.id));
     return (
         <ArtistDashboard artist={artist} products={products} />

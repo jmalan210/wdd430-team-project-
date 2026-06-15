@@ -37,13 +37,16 @@ export default function ProductCard({ product }: Props) {
             </div>
             
             <div className="relative h-72 w-full">
-                 {product.images?.map((url: string, index: number) => (
+                    {(product.images?.length
+                        ? product.images
+                        : ["/images/placeholder.svg"])
+                        .map((url: string, index: number) => (
                     <Image
                         key={index}
                         src={url}
                         alt={product.name}
                          fill
-                         sizes="(max-width: 768px) 100vs, 33vw"
+                         sizes="(max-width: 768px) 100vw 33vw"
                         className="object-contain rounded-lg"
                     />
                 ))}
