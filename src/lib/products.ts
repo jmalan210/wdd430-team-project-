@@ -125,3 +125,47 @@ export async function getProductsById(productId: number) {
     );
     return result.rows[0] ?? null;
 }
+
+export async function createProduct({ artistId, name, description, price, imageUrl
+}: {
+        artistId: number; name: string; description: string; price: number; imageUrl: string
+    }) {
+    
+    const client = await pool.connect();
+
+    try {
+        await client.query("BEGIN");
+
+        if (!imageUrl) {
+            throw new Error("Image URL is required");
+        }
+        const productResult = await client.query(
+            `
+            INSERT INTO products(
+            artist_id, name, description, price)
+            VALUES ($1, $2, $3, $4)
+            RETURNING *            `,
+            [artistId, name, description, price]
+        );
+
+        const product = productResult.rows[0];
+
+        await client.query(
+            `INSERT INTO product_images (
+            product_id, image_url, alt_text)
+            VALUES ($1, $2, $3)`, [product.id, imageUrl, name,]
+        );
+
+        await client.query("COMMIT");
+
+        return product;
+    } catch (error) {
+        await client.query("ROLLBACK");
+        throw error;
+    } finally {
+        client.release();
+    }
+    
+}
+
+   

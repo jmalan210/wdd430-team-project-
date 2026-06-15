@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import CreateProductForm from "@/components/CreateProductForm"
 
 export default function ArtistDashboard({ artist, products, }: any) {
     const [bio, setBio] = useState(artist.bio || "");
@@ -80,7 +81,7 @@ export default function ArtistDashboard({ artist, products, }: any) {
                                 <div className="shrink-0">
                                     
                     <Image 
-                        src={`/${product.images[0]}`}
+                        src={product.images[0]}
                         alt={product.name}
                         width={150}
                         height={150}
@@ -94,6 +95,7 @@ export default function ArtistDashboard({ artist, products, }: any) {
                
                 </div>
                 </div>
+                <CreateProductForm artistId={artist.id} />
                 </div>
         </main>
     )

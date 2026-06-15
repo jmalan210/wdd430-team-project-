@@ -40,7 +40,7 @@ export default function ProductCard({ product }: Props) {
                  {product.images?.map((url: string, index: number) => (
                     <Image
                         key={index}
-                        src={`/${url}`}
+                        src={url}
                         alt={product.name}
                          fill
                          sizes="(max-width: 768px) 100vs, 33vw"
