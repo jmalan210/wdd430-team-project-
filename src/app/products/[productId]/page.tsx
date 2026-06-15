@@ -37,7 +37,7 @@ export default async function Page({
             
             <div className="flex flex-col items-center p-4">
                 
-                <Image src={`/${product.image_url}`} alt={product.alt_text} width={800} height={1000} className="w-full h-auto max-w-lg" />
+                <Image src={product.image_url} alt={product.alt_text} width={800} height={1000} className="w-full h-auto max-w-lg" />
                 <p className="italic">{`$${product.price}`}</p>
                 <RatingDisplay
                     rating={product.average_rating}
