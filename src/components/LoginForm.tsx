@@ -30,7 +30,7 @@ export default function LoginForm() {
         router.refresh();
     }
     return (
-        <div>
+        <div className="flex flex-col items-center justify-center min-h-screen">
     <form onSubmit={handleSubmit}
         className="flex flex-col gap-4 p-6 border rounded-lg w-80">
         <h1>Login</h1>

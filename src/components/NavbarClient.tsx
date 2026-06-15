@@ -84,7 +84,7 @@ export default function NavbarClient() {
                                             </Link>
                                  )}
 
-                                    <button onClick={() => signOut()} className="text-xs bold underline">Logout</button>
+                                    <button onClick={() => signOut({callbackUrl: "/"})} className="text-xs bold underline">Logout</button>
                                     </div>
                                     </div>
                                </>
