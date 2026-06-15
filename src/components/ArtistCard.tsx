@@ -14,7 +14,7 @@ export default function ArtistCard({artist}: any) {
                     </div>
 
                      <div className="relative w-36 h-36 shrink-0">
-                        <Image src={artist.image_url}
+                        <Image src={artist.image_url || "/images/profile_placeholder.svg"}
                             alt={`${artist.first_name} ${artist.last_name}`}
                             fill
                             sizes="(max-width: 768px) 100vs, 33vw"

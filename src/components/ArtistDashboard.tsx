@@ -13,7 +13,7 @@ export default function ArtistDashboard({ artist, products, }: any) {
     const [businessName, setBusinessName] = useState(artist.business_name || "");
     
     const handleSave = async () => {
-        let imgUrl = artist.image_url;
+        let imgUrl = artist.image_url || "/images/profile_placeholder.svg";
         try {
             if (image) {
                 const formData = new FormData();
@@ -69,7 +69,7 @@ export default function ArtistDashboard({ artist, products, }: any) {
 
                         <div className="shrink-0">
                             <Image
-                                src={artist.image_url}
+                                src={artist.image_url || "/images/profile_placeholder.svg"}
                                 alt={`${artist.first_name} ${artist.last_name}`}
                                 width={300}
                                 height={300}
