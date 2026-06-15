@@ -17,17 +17,18 @@ export async function PUT(req: NextRequest) {
         return NextResponse.json({ message: "Not Authorized" });
     }
 
-    const { bio, medium, businessName } = await req.json();
+    const { bio, medium, businessName, image_url } = await req.json();
 
     await pool.query(
         `
         update artists
         set bio = $1, 
         medium = $2, 
-        business_name = $3
-        where user_id = $4
+        business_name = $3,
+        image_url = $4
+        where user_id = $5
         `,
-        [bio, medium, businessName, session.user.id]
+        [bio, medium, businessName, image_url, session.user.id]
     );
 
     return NextResponse.json({ message: "Profile updated" });
