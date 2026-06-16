@@ -38,8 +38,8 @@ export default async function Page({
                 <BackButton />
                    
             </div >
-            <div className="grid md:grid-cols-3 gap-4 m-4">
-            <div className="border-2 border-navy rounded-lg col-span-2 ">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 m-4">
+            <section className="border-2 border-sage/50 rounded-lg shadow-lg lg:col-span-2 ">
             <h1 className="text-center text-3xl">{product.name}</h1>
             <h2 className="text-center text-xl text-terracotta">by {product.first_name} {product.last_name} of {product.business_name}</h2>
             
@@ -54,10 +54,11 @@ export default async function Page({
                 <p className="justify-center align-middle line-clamp-3">{product.description}</p>
               </div>
             
-            </div>
+            </section>
 
 
-            <div className="flex flex-col gap-4 border-2 border-navy rounded-lg flex-1">
+                <section className="border-2 border-sage/50 shadow-lg rounded-lg p-4">
+                    <div className="flex flex-col items-center">
                 
                 <ProductReviews reviews={reviews} />
                 {session ? (
@@ -66,9 +67,9 @@ export default async function Page({
                         <p className="mt-4 p-4">Please <Link href="/login" className="font-bold text-terracotta underline">log in </Link> to leave a review</p>
                )}
                                
-                               
+                       </div>        
                 
-                </div>
+                </section>
             </div>
             
            

@@ -91,7 +91,7 @@ export default function ReviewForm({ productId, existingReview }: { productId: n
                         );
                     })}
                 </div>
-                <div className="flex flex-col w-full max-w-2xl mx auto p-4">
+                <div className="flex flex-col w-full max-w-2xl mx-auto p-4">
                 <p>{rating} out of 5 stars</p>
 
                 <label htmlFor="review">Review</label>
