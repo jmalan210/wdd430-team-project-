@@ -134,7 +134,7 @@ export default function NavbarClient() {
                                     </Link>
                                 )}
                                 
-                                <button onClick={() => signOut()} className="py-2 text-left text-terracotta">Logout</button>
+                                <button onClick={() => signOut({ callbackUrl: "/"})} className="py-2 text-left text-terracotta">Logout</button>
                             </>
                         )}
                         {!session && (
