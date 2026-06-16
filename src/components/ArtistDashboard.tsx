@@ -77,7 +77,7 @@ export default function ArtistDashboard({ artist, products, }: any) {
                                 className="rounded-lg shadow-xl mb-2" />
                         </div>
 
-                        <div className="flex flex-col border-2 border-sage/25 p-2 mt-4 rounded-lg w-full lg:flex-1">
+                        <div className="flex flex-col border-2 border-sage/25 p-2 mt-4 rounded-lg w-full lg:flex-1 shadow-lg">
                             <h2 className="text-center text-xl font-bold">Edit Profile Details</h2>
                         
                             <label className="font-bold">Profile Image</label>
@@ -99,14 +99,14 @@ export default function ArtistDashboard({ artist, products, }: any) {
                             <textarea value={bio}
                                 onChange={(e) => setBio(e.target.value)} className="border-2 p-2" />
                 
-                            <button onClick={handleSave} className="bg-terracotta text-ivory p-2 rounded-lg mt-4 max-w-2xl self-center">Save Changes</button>
+                            <button onClick={handleSave} className="bg-terracotta text-ivory p-2 rounded-lg mt-4 max-w-2xl self-center shadow-lg">Save Changes</button>
                             
                         </div>
                     </div>
                 
                     <div  className="flex flex-col lg:flex-row gap-8">
                     <div>
-                        <div className="border-2 border-sage/25 rounded-lg p-2 mt-4">
+                        <div className="border-2 border-sage/25 rounded-lg p-2 mt-4 shadow-lg">
                             <h2 className="text-center text-xl font-bold">Current Products</h2>
                             <div>
                             {products.map((product: any) => (

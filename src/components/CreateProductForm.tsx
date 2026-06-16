@@ -129,7 +129,7 @@ export default function ProductForm({
                 )}
                 <button
                   type="submit"
-                    className="mt-4 rounded bg-terracotta px-4 py-2 text-ivory w-1/2 self-center my-4">
+                    className="mt-4 rounded bg-terracotta px-4 py-2 text-ivory w-1/2 self-center my-4 shadow-lg">
                    
                     Create Product</button>
                     </div>

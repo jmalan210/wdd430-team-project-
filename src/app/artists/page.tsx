@@ -38,7 +38,7 @@ export default async function ArtistsPage({ searchParams, }: {
             <QueryDropDown
             
                 paramName="sort"
-                defaultLabel="Sort By"
+                defaultLabel="All"
                 defaultValue=""
                             options={[
                                 { label: "Artist Name", value: "last_name" },

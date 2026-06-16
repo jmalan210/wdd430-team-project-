@@ -50,9 +50,9 @@ export async function getArtistProducts(artistId: number) {
 function getOrderBy(sort?: string) {
     switch (sort) {
         case "price_asc":
-            return "p.price ASC";
+            return "p.price ASC, p.name ASC";
         case "price_desc":
-            return "p.price DESC";
+            return "p.price DESC, p.name ASC";
         case "name":
             return "p.name ASC";
         case "rating_desc":
