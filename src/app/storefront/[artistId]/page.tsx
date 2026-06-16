@@ -26,7 +26,7 @@ export default async function StoreFrontPage({
         return <div>Artist Not Found</div>;
     }
     const products = await getArtistProducts(artistIdNum);
-    console.log("products:", products);
+   
     
     return (
         <div>

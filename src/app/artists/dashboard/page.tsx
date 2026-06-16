@@ -19,8 +19,7 @@ export default async function page() {
         `select * from artists where user_id = $1`,
         [session.user.id]
     );
-    console.log("session.user.id:", session.user.id);
-    console.log("rows:", result.rows);
+    
 
     if (result.rows.length === 0) {
         return <p>No artist profile found.</p>

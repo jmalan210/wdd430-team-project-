@@ -20,7 +20,7 @@ type Props = {
 }
 
 export default function ProductCard({ product }: Props) {
-      console.log(product)
+    
     return (
       
         <Link 
@@ -28,10 +28,15 @@ export default function ProductCard({ product }: Props) {
         className="block h-full"
         >
             
-        <div className="flex flex-col shadow-xl rounded-lg p-4 bg-ivory">
+        <div className="flex flex-col shadow-xl rounded-lg p-4 bg-ivory h-full">
        
             <div >
-            <h3 className="text-2xl bold">{product.name}</h3>
+            <h3 className="text-2xl
+        font-bold
+        overflow-hidden
+        [display:-webkit-box]
+        [-webkit-box-orient:vertical]
+        [-webkit-line-clamp:2]">{product.name}</h3>
             <p className="text-terracotta pb-2">by {product.business_name}</p>
             <p className="italic pb-2">${product.price}</p>
             </div>
@@ -51,10 +56,11 @@ export default function ProductCard({ product }: Props) {
                     />
                 ))}
             </div>
-            
+            <div className="mt-auto">
                 <RatingDisplay
                     rating= {product.average_rating}
-                    count= {product.review_count} />
+                        count={product.review_count} />
+                    </div>
         </div>
         </Link>
     );

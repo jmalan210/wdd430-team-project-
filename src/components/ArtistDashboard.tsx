@@ -7,7 +7,7 @@ import CreateProductForm from "@/components/CreateProductForm"
 export default function ArtistDashboard({ artist, products, }: any) {
     const [bio, setBio] = useState(artist.bio || "");
     const [image, setImage] = useState<File | null>(null);
-    console.log("products:", products);
+   
 
     const [medium, setMedium] = useState(artist.medium || "");
     const [businessName, setBusinessName] = useState(artist.business_name || "");

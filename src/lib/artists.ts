@@ -6,9 +6,7 @@ export async function getArtists(
     mediums: string[] = []) {
     
     const orderBy = getOrderBy(sort);
-    console.log("sort:", sort);
-    console.log("orderBy:", orderBy);
-    console.log("mediums:", mediums);
+   
     
     if (mediums.length > 0) {
         const result = await pool.query(

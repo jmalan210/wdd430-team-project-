@@ -65,16 +65,27 @@ function getOrderBy(sort?: string) {
     }
 }
 
-export async function getAllProducts(sort: string = "id") {
+export async function getAllProducts(sort: string = "id", mediums: string[] = []) {
     
     const orderBy = getOrderBy(sort);
         
-        const result = await pool.query(
-            `${PRODUCT_BASE_QUERY}
+    let query = PRODUCT_BASE_QUERY;
+    const values: any[] = []
+
+    if (mediums.length > 0) {
+        query += `where a.medium = ANY($1)`;
+        values.push(mediums)
+
+        }
+    
+    query += `
             ORDER BY ${orderBy}
-        `,
+        `;
             
-        );
+    const result = await pool.query(query, values);
+    console.log("mediums received:", mediums);
+    console.log("query:", query);
+    console.log("values:", values);
 
         return result.rows;
     }
@@ -89,6 +100,7 @@ export async function getProductsByIds(productIds: number[]) {
         [productIds]
 
     );
+    
     return result.rows;
 }
 

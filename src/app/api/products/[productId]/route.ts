@@ -38,7 +38,7 @@ export async function PUT(
     }
 
     const { name, description, price, image_url } = await req.json();
-    console.log("image_url received:", image_url);
+   
 
     await pool.query(
         `

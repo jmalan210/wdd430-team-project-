@@ -14,9 +14,7 @@ export async function POST(req: Request) {
 
         }
 
-        console.log("FILE TYPE:", file.type);
-        console.log("FILE SIZE:", file.size);
-        console.log("FILE NAME:", file.name);
+      
 
         const filename = `${Date.now()}-${file.name}`;
         const blob = await put(filename, file, {

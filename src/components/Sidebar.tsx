@@ -15,7 +15,7 @@ export default function SideBar({ children }: Props) {
             <button
                 onClick={() => setOpen(true)}
                 className="md:hidden border rounded px-4 py-2 mb-4">
-                ☰ Filters
+                ☰ Filter & Sort
             </button>
             {/* {Desktop sidebar} */}
             <aside className="hidden md:block w-64 shrink-0 border rounded-lg p-4">

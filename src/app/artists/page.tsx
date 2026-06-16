@@ -32,7 +32,7 @@ export default async function ArtistsPage({ searchParams, }: {
             <h1 className="text-4xl font-bold mb-6 text-center bg-[linear-gradient(to_bottom_right,#2b4b64,#788E79,#935739)] text-white  py-2" >Artists</h1>
              <div className="flex flex-col md:flex-row gap-6">
             <SideBar>
-                <h2>Filters</h2>
+                <h2>Sort</h2>
            
             
             <QueryDropDown
