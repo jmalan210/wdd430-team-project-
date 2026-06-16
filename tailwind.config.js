@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         terracotta: '#935739',
         sage: '#788E79',
+        darkSage: "4a594b",
         navy: '#2b4b64',
         ivory: '#f9f6f0'
       },

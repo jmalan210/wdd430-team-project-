@@ -82,7 +82,7 @@ export default function ReviewForm({ productId, existingReview }: { productId: n
                                 onClick={() => setRating(star)}
                                 onMouseEnter={() => setHoveredStar(star)}
                                 onMouseLeave={() => setHoveredStar(0)}
-                                className={filled ? "cursor-pointer text-yellow-500" : "cursor-pointer text-gray-300"}
+                                className={filled ? "cursor-pointer text-amber-700" : "cursor-pointer text-navy"}
                             >
                                 {star <= (hoveredStar || rating)
                                     ? "★"

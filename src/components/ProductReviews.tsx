@@ -7,7 +7,7 @@ export default function ProductReviews({ reviews }: any) {
                     key={review.id}
                     className="m-4">
                     <p className="font-bold text-l">{review.firstname} {review.lastname}</p>
-                    <p>Rating: {review.rating}<span className="text-xl text-yellow-500">★</span></p>
+                    <p>Rating: {review.rating}<span className="text-xl text-amber-700">★</span></p>
                     <p className="italic">{review.review_text}</p>
                 </div>
             ))}
