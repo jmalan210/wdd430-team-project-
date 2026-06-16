@@ -1,6 +1,7 @@
 "use client"
 import { useState } from "react"
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function ReviewForm({ productId, existingReview }: { productId: number; existingReview?: any }) {
     const [rating, setRating] = useState(existingReview?.rating || 0);
@@ -12,12 +13,12 @@ export default function ReviewForm({ productId, existingReview }: { productId: n
 
     const handleSave = async () => {
          if (rating === 0) {
-            alert("Please select a rating");
+            toast.error("Please select a rating");
              return;
         }
 
         if (!reviewText.trim()) {
-            alert("Please enter a review text")
+            toast.error("Please enter a review text")
             return;
         }
         const url = isEdit
@@ -45,18 +46,18 @@ export default function ReviewForm({ productId, existingReview }: { productId: n
         const data = await response.json();
         
         if (response.ok) {
-            alert("Review Submitted!");
+            toast.success("Review Submitted!");
             setReviewText("");
             setRating(0);
             router.refresh();
 
         } else if (response.status === 403) {
-            alert(data.message)
+            toast.error(data.message)
         } else if (response.status === 400) {
-            alert(data.message)
+            toast.error(data.message)
         } 
          else {
-            alert("Something went wrong");
+            toast.error("Something went wrong");
         }
         
            

@@ -1,6 +1,7 @@
 "use client"
 import { useRouter } from "next/navigation";
 import { useState } from "react"
+import { toast } from "sonner";
 
 export default function ProductEditForm({ product }: any) {
     const router = useRouter();
@@ -28,7 +29,7 @@ export default function ProductEditForm({ product }: any) {
                 );
 
                 if (!uploadRes.ok) {
-                    alert("Image upload failed");
+                    toast.error("Image upload failed");
                     return;
                 }
                 const uploadData = await uploadRes.json();
@@ -51,16 +52,16 @@ export default function ProductEditForm({ product }: any) {
                 }
             );
             if (response.ok) {
-                alert("Product udpated!")
+                toast.success("Product udpated!")
                 router.push(`/artists/dashboard`);
                     
 
             } else {
-                alert("Update failed")
+                toast.error("Update failed")
             }
         } catch (err) {
             console.error(err);
-            alert("Update failed");
+            toast.error("Update failed");
         }
     };
 
@@ -82,7 +83,7 @@ export default function ProductEditForm({ product }: any) {
             router.push("/artists/dashboard");
         }
         else {
-            alert("Delete failed")
+            toast.error("Delete failed")
         }
     };
 

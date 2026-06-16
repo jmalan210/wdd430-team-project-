@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CreateProductForm from "@/components/CreateProductForm"
+import { toast } from "sonner";
 
 export default function ArtistDashboard({ artist, products, }: any) {
     const [bio, setBio] = useState(artist.bio || "");
@@ -27,7 +28,7 @@ export default function ArtistDashboard({ artist, products, }: any) {
                 const uploadData = await uploadRes.json();
 
                 if (!uploadRes.ok) {
-                    alert("Image upload failed");
+                    toast.error("Image upload failed");
                     return;
                 }
 
@@ -47,7 +48,7 @@ export default function ArtistDashboard({ artist, products, }: any) {
                 }
             );
             if (response.ok) {
-                alert("Saved!");
+                toast.success("Saved!");
 
             }
         } catch (err) {
