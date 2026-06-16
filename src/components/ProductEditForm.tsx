@@ -88,6 +88,7 @@ export default function ProductEditForm({ product }: any) {
 
     return (
         <main>
+            <div className="m-4">
             <h1 className="text-center text-3xl">
                 Edit Product Listing
             </h1>
@@ -127,7 +128,7 @@ export default function ProductEditForm({ product }: any) {
                     onClick={handleDelete}
                 className="mt-4 rounded bg-red-700 px-4 py-2 text-ivory">Permanently Delete Product</button>
             </div>
-          
+          </div>
         </main>
     );
 }
