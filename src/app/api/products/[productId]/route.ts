@@ -53,11 +53,22 @@ export async function PUT(
     );
 
     if (image_url) {
-        await pool.query(
+        const existingImage = await pool.query(
+            `SELECT id FROM product_images WHERE product_id = $1`, [productId]
+        );
+        if (existingImage.rows.length > 0) {
+            await pool.query(
             `UPDATE product_images
         SET image_url = $1
         WHERE product_id = $2`, [image_url, productId]
         );
+        } else {
+            await pool.query(
+                `INSERT INTO product_images (product_id, image_url)
+                VALUES ($1, $2)`, [productId, image_url]
+            );
+        }
+        
     }
 
     return NextResponse.json({ message: "Product updated" });

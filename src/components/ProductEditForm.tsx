@@ -12,9 +12,7 @@ export default function ProductEditForm({ product }: any) {
 
     const handleSave = async () => {
         
-        let imageUrl = product.images?.find((img: string) => img?.trim()) ||
-            product.image_url ||
-            "/images/placeholder.svg";
+        let imageUrl = product.images?.[0] || product.image_url || "";
             
 
         try {
