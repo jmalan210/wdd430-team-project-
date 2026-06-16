@@ -29,7 +29,7 @@ export default async function ArtistsPage({ searchParams, }: {
         <main className="p-8">
            
           
-            <h1 className="text-4xl font-bold mb-6 text-center bg-gradient-to-l from-navy via-sage to-terracotta text-ivory py-2" >Artists</h1>
+            <h1 className="text-4xl font-bold mb-6 text-center bg-gradient-to-l from-navy via-sage to-terracotta text-ivory py-2 rounded-lg" >Artists</h1>
              <div className="flex flex-col md:flex-row gap-6">
             <SideBar>
                 <h2>Sort</h2>

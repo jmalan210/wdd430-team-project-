@@ -52,7 +52,7 @@ export default function ProductCard({ product }: Props) {
                         alt={product.name}
                          fill
                          sizes="(max-width: 768px) 100vw 33vw"
-                        className="object-cover"
+                        className="object-cover rounded-lg shadow-lg"
                     />
                 ))}
             </div>
