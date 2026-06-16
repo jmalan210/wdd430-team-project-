@@ -54,7 +54,7 @@ export default function ProductEditForm({ product }: any) {
             );
             if (response.ok) {
                 alert("Product udpated!")
-                router.push(`/products/${product.id}`);
+                router.push(`/artists/dashboard`);
                     
 
             } else {

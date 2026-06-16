@@ -13,7 +13,12 @@ export default function ReviewForm({ productId, existingReview }: { productId: n
     const handleSave = async () => {
          if (rating === 0) {
             alert("Please select a rating");
-            return
+             return;
+        }
+
+        if (!reviewText.trim()) {
+            alert("Please enter a review text")
+            return;
         }
         const url = isEdit
             ? `/api/reviews/${productId}`

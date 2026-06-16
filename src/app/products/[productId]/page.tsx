@@ -6,6 +6,7 @@ import { auth } from "@/auth";
 import { getProductsById } from "@/lib/products";
 import { getProductReviews, getUserReview } from "@/lib/reviews";
 import RatingDisplay from "@/components/RatingDisplay";
+import BackButton from "@/components/BackButton";
 
 
 
@@ -34,18 +35,8 @@ export default async function Page({
     return (
         <main >
             <div className="p-4">
-                <Link
-                    href="/products"
-                >
-                <Image
-                src="/images/arrow.svg"
-                alt="back arrow icon"
-                width={30}
-                height={30}
-                className="rotate-180"
-                    
-                    />
-                    </Link>
+                <BackButton />
+                   
             </div >
             <div className="grid md:grid-cols-3 gap-4 m-4">
             <div className="border-2 border-navy rounded-lg col-span-2 ">

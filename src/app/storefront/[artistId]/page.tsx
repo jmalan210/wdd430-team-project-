@@ -33,7 +33,7 @@ export default async function StoreFrontPage({
     
     return (
         <>
-            <h1 className="text-4xl font-bold mb-6 text-center bg-gradient-to-l from-navy via-sage to-terracotta text-ivory py-2 my-4">{artist?.business_name}</h1>
+            <h1 className="text-4xl font-bold mb-6 text-center bg-gradient-to-l from-navy via-sage to-terracotta text-ivory py-2 m-4 rounded-lg">{artist?.business_name}</h1>
             
         <div className="flex flex-col lg:flex-row gap-8">
             
@@ -51,7 +51,7 @@ export default async function StoreFrontPage({
                     sizes="(max-width: 768px) 100vs, 33vw"
                     className="object-cover rounded-lg shadow-lg border-4 border-white" />
             </div> 
-                <p>{artist.bio}</p>
+                <p className="pl-4">{artist.bio}</p>
                 </div>
            
         <div className="lg:w-3/4 m-4">
