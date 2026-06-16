@@ -19,6 +19,32 @@ const bodyFont = Inter({
 export const metadata: Metadata = {
   title: "Handcrafted Haven",
   description: "A community for artisans",
+  keywords: [
+    "handmade",
+    "artisan",
+    "crafts",
+    "marketplace",
+    "artists",
+    "photograpy",
+    "painting",
+    "jewelry",
+    "fiber art",
+    "fabric art",
+    "sculpture",
+    "metalwork", 
+    "glassblowing",
+    "ceramics",
+    "pottery",
+    "clothing",
+    "home goods",
+    "housewares",
+    "art",
+    "dishes",
+    "lithograph",
+    "knit",
+    "crochet"
+
+  ]
 };
 
 export default function RootLayout({ children, }: {
