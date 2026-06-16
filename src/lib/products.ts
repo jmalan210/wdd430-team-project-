@@ -112,6 +112,7 @@ export async function getProductsById(productId: number) {
     a.first_name,
     a.last_name,
     a.business_name,
+    p.artist_id,
     pi.image_url,
     pi.alt_text,
     COALESCE(AVG(r.rating), 0):: float as average_rating,

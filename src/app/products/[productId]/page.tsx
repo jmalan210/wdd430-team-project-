@@ -39,9 +39,11 @@ export default async function Page({
                    
             </div >
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 m-4">
-            <section className="border-2 border-sage/50 rounded-lg shadow-lg lg:col-span-2 ">
+            <section className="border-2 border-sage/15 rounded-lg shadow-lg lg:col-span-2 ">
             <h1 className="text-center text-3xl">{product.name}</h1>
-            <h2 className="text-center text-xl text-terracotta">by {product.first_name} {product.last_name} of {product.business_name}</h2>
+                    <h2 className="text-center text-xl text-terracotta">by {product.first_name} {product.last_name} of{" "}
+                        <Link href={`/storefront/${product.artist_id}`} className="hover:text-navy"> {product.business_name}</Link>
+                    </h2>
             
                 <div className="flex flex-col items-center p-4">
                     
@@ -57,7 +59,7 @@ export default async function Page({
             </section>
 
 
-                <section className="border-2 border-sage/50 shadow-lg rounded-lg p-4">
+                <section className="border-2 border-sage/15 shadow-lg rounded-lg p-4">
                     <div className="flex flex-col items-center">
                 
                 <ProductReviews reviews={reviews} />
