@@ -4,6 +4,7 @@ import ProductCard from "@/components/ProductCard";
 import Image from "next/image";
 import Link from "next/link";
 import { head } from "@vercel/blob";
+import BackButton from "@/components/BackButton";
 
 
 
@@ -34,6 +35,9 @@ export default async function StoreFrontPage({
     return (
         <>
             <h1 className="text-4xl font-bold mb-6 text-center bg-gradient-to-l from-navy via-sage to-terracotta text-ivory py-2 m-4 rounded-lg">{artist?.business_name}</h1>
+            <div className="mx-4">
+                <BackButton />
+            </div>
             
         <div className="flex flex-col lg:flex-row gap-8">
             
