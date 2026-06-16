@@ -4,6 +4,8 @@ import SideBar from "@/components/Sidebar";
 import CheckboxFilter from "@/components/CheckboxFilter";
 import { getArtistMediums } from "@/lib/artists";
 import { getAllProducts } from "@/lib/products";
+export const dynamic = "force-dynamic"; //allows product reviews to refresh immediately
+
 
 
 export default async function ProductsPage({
