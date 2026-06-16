@@ -17,7 +17,7 @@ type Props = {
 export default function QueryDropDown({
     options,
     paramName = "sort",
-    defaultLabel = "All",
+    defaultLabel = "Newest",
     defaultValue = "",
 }: Props) {
     const router = useRouter();

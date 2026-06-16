@@ -60,7 +60,7 @@ function getOrderBy(sort?: string) {
         case "business_name":
             return "a.business_name ASC"
         default:
-            return "p.id ASC"
+            return "p.created_at DESC"
         
     }
 }
