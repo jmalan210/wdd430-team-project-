@@ -66,7 +66,7 @@ export default async function Page({
                 {session ? (
                     <ReviewForm productId={Number(productId)} existingReview={userReview} />
                 ) : (
-                        <p className="mt-4 p-4">Please <Link href="/login" className="font-bold text-terracotta underline">log in </Link> to leave a review</p>
+                        <p className="mt-4 p-4">Please <Link href={`/login?callbackUrl=/products/${productId}`} className="font-bold text-terracotta underline">log in </Link> to leave a review</p>
                )}
                                
                        </div>        

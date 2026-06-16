@@ -1,12 +1,14 @@
 "use client";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import type { FormEvent } from "react";
 import { useState } from "react";
 
 export default function LoginForm() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const callbackUrl = searchParams.get("callbackUrl") || "/";
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -26,7 +28,7 @@ export default function LoginForm() {
             setError("Invalid email or password");
             return;
         }
-        router.push("/");
+        router.push(callbackUrl);
         router.refresh();
     }
     return (

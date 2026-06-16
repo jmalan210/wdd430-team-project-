@@ -43,7 +43,7 @@ export default function ProductForm({
 
                 if (!uploadRes.ok) {
                     setError("Image upload failed")
-                        return;
+                    return;
 
                 }
 
@@ -71,7 +71,7 @@ export default function ProductForm({
                 return;
             }
 
-            router.push("/products");
+            router.push("/artists/dashboard");
             router.refresh();
         } catch (err) {
             setError("Something went wrong");
