@@ -9,6 +9,7 @@ export default async function Home() {
   const artists = await getSpotlightArtists();
   
   const products = await getSpotlightProducts();
+  console.log(products)
   
   return (
     <main className="bg-ivory">
