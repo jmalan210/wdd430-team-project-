@@ -2,6 +2,7 @@ import ArtistCard from "@/components/ArtistCard";
 import ProductCard from "@/components/ProductCard";
 import { getSpotlightArtists } from "@/lib/spotlight";
 import { getSpotlightProducts } from "@/lib/spotlight";
+export const dynamic = "force-dynamic"
 
 
 
