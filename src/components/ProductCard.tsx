@@ -36,7 +36,7 @@ export default function ProductCard({ product }: Props) {
         overflow-hidden
         [display:-webkit-box]
         [-webkit-box-orient:vertical]
-        [-webkit-line-clamp:2]">{product.name}</h3>
+        [-webkit-line-clamp:1]">{product.name}</h3>
             <p className="text-terracotta pb-2">by {product.business_name}</p>
             <p className="italic pb-2">${product.price}</p>
             </div>

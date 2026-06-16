@@ -39,6 +39,7 @@ export default async function ProductsPage({
                     { label: "Name", value: "name" },
                     { label: "Price ↑", value: "price_asc" },
                     { label: "Price ↓", value: "price_desc" },
+                    {label: "Highest Rated", value: "rating_desc"},
                     { label: "Business Name", value: "business_name"},
                        
                     

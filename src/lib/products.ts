@@ -55,8 +55,8 @@ function getOrderBy(sort?: string) {
             return "p.price DESC";
         case "name":
             return "p.name ASC";
-        case "medium":
-            return "a.medium ASC";
+        case "rating_desc":
+            return "average_rating DESC, review_count DESC, p.name ASC";
         case "business_name":
             return "a.business_name ASC"
         default:
