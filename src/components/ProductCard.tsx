@@ -28,7 +28,7 @@ export default function ProductCard({ product }: Props) {
         className="block h-full"
         >
             
-        <div className="flex flex-col shadow-xl rounded-lg p-4 bg-ivory h-full">
+        <div className="flex flex-col shadow-xl rounded-lg p-4 bg-ivory h-full border-2 border-sage/15 transition-transform duration-200 hover:scale-[1.01] hover:border-sage/75">
        
             <div >
             <h3 className="text-2xl
@@ -41,7 +41,7 @@ export default function ProductCard({ product }: Props) {
             <p className="italic pb-2">${product.price}</p>
             </div>
             
-            <div className="relative h-72 w-full">
+            <div className="relative h-72 w-full ">
                     {(product.images?.length
                         ? product.images
                         : ["/images/placeholder.svg"])
@@ -52,7 +52,7 @@ export default function ProductCard({ product }: Props) {
                         alt={product.name}
                          fill
                          sizes="(max-width: 768px) 100vw 33vw"
-                        className="object-contain rounded-lg"
+                        className="object-cover"
                     />
                 ))}
             </div>

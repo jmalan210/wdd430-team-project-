@@ -87,8 +87,8 @@ export default function ProductForm({
                 onSubmit={handleSubmit}
                 className="flex flex-col items-center gap-4"
             >
-            <div>
-            <h2 className="font-bold text-3xl text-center">
+            <div className="border-2 border-sage/25 rounded-lg shadow-lg my-4 p-4">
+            <h2 className="text-center text-xl font-bold my-2">
                 Create a New Product
             </h2>
             <div className="flex flex-col items-center">

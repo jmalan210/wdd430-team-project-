@@ -57,9 +57,10 @@ export default function ArtistDashboard({ artist, products, }: any) {
     
         return (
             <main className="p-10">
-                <h1 className="text-center text-4xl p-2">Artist Dashboard</h1>
-                <Link
-                    href={`/storefront/${artist.id}`} className=" flex justify-center text-terracotta underline ">View Public Storefront</Link>
+                <h1 className="text-4xl font-bold mb-6 text-center bg-gradient-to-l from-navy via-sage to-terracotta text-ivory py-2 rounded-lg">Artist Dashboard</h1>
+                <div className="flex justify-center"><Link
+                                href={`/storefront/${artist.id}`} className=" inline-flex w-fit text-center text-terracotta underline">View Public Storefront</Link>
+                                </div>
             
 
                 <div className="flex flex-col">
@@ -76,7 +77,7 @@ export default function ArtistDashboard({ artist, products, }: any) {
                                 className="rounded-lg shadow-xl mb-2" />
                         </div>
 
-                        <div className="flex flex-col border-2 border-navy p-2 mt-4 rounded-lg w-full lg:flex-1">
+                        <div className="flex flex-col border-2 border-sage/25 p-2 mt-4 rounded-lg w-full lg:flex-1">
                             <h2 className="text-center text-xl font-bold">Edit Profile Details</h2>
                         
                             <label className="font-bold">Profile Image</label>
@@ -99,19 +100,22 @@ export default function ArtistDashboard({ artist, products, }: any) {
                                 onChange={(e) => setBio(e.target.value)} className="border-2 p-2" />
                 
                             <button onClick={handleSave} className="bg-terracotta text-ivory p-2 rounded-lg mt-4 max-w-2xl self-center">Save Changes</button>
+                            
                         </div>
                     </div>
                 
-
+                    <div  className="flex flex-col lg:flex-row gap-8">
                     <div>
-                        <div className="border-2 border-navy rounded-lg p-2 mt-4">
+                        <div className="border-2 border-sage/25 rounded-lg p-2 mt-4">
                             <h2 className="text-center text-xl font-bold">Current Products</h2>
+                            <div>
                             {products.map((product: any) => (
                                 <div
                                     key={product.id}
                                     className="my-8">
                                 
                                     <p className="font-bold">{product.name}</p>
+                                    <p>${product.price}</p>
                                     <div className="shrink-0">
                                     
                                         <Image
@@ -125,12 +129,17 @@ export default function ArtistDashboard({ artist, products, }: any) {
                                     <p className="italic">{product.description}</p>
                                     <Link href={`/products/edit/${product.id}`} className="text-terracotta underline">Edit Product</Link>
                                 </div>
+                                
                             ))}
-               
+                            </div>
+                             
                         </div>
+                       
                     </div>
-                    <CreateProductForm artistId={artist.id} />
-                </div>
+                    <div ><CreateProductForm artistId={artist.id} /></div>
+                    
+                    </div>
+                    </div>
             </main>
         )
     }
